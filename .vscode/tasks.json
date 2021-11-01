@@ -31,6 +31,17 @@
                 "$gcc"
             ],
             "group": "build",
+        },
+        {
+            "label": "Build All",
+            "type": "shell",
+            "linux": {
+                "command": "${workspaceFolder}/build_all.sh"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
         }
     ]
 }

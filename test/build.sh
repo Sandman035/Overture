@@ -13,7 +13,7 @@ assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC" 
 includeFlags="-Isrc -I../spectre/src/"
 linkerFlags="-L../bin/ -lspectre -Wl,-rpath,. -lstdc++"
-defines=""
+defines="-D_DEBUG -DIMPORT"
 
 echo "Building $assembly..."
 echo clang $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags

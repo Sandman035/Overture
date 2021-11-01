@@ -1,4 +1,5 @@
 #pragma once
 #include <iostream>
+#include <defines.hpp>
 
-void doshit();
+API void doshit();
