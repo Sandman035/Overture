@@ -54,19 +54,12 @@ typedef char b8;
 #error "Unknown platform!"
 #endif
 
-//Windows Specific shit for dlls
+#ifdef PLATFORM_WINDOWS
 #ifdef EXPORT
-// Exports
-#ifdef _MSC_VER
 #define API __declspec(dllexport)
 #else
-#define API __attribute__((visibility("default")))
-#endif
-#else
-// Imports
-#ifdef _MSC_VER
 #define API __declspec(dllimport)
+#endif
 #else
 #define API
-#endif
 #endif

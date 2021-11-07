@@ -9,7 +9,7 @@ cFilenames=$(find . -type f -name "*.cpp")
 
 assembly="spectre"
 compilerFlags="-g -shared -fdeclspec -fPIC" 
-includeFlags="-Isrc"
+includeFlags="-Isrc -Ithirdparty/glfw/include"
 linkerFlags="-lstdc++"
 defines="-D_DEBUG -DEXPORT"
 
