@@ -1,6 +1,6 @@
 #pragma once
 
-#include <defines.hpp>
+#include <defines.h>
 
 #define LOG_WARN_ENABLED 1
 #define LOG_INFO_ENABLED 1
@@ -8,7 +8,7 @@
 #define LOG_TRACE_ENABLED 1
 
 // Disable debug and trace logging for release builds.
-#if KRELEASE == 1
+#if RELEASE == 1
 #define LOG_DEBUG_ENABLED 0
 #define LOG_TRACE_ENABLED 0
 #endif
