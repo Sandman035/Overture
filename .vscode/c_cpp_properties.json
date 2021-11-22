@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/spectre/src"
+                "${workspaceFolder}/overture/src"
             ],
             "defines": [
                 "_DEBUG",

@@ -5,7 +5,7 @@ set echo on
 echo "Building everything..."
 
 
-pushd spectre
+pushd overture
 source build.sh
 popd
 

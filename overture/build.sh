@@ -7,7 +7,7 @@ mkdir -p ../bin
 # Get a list of all the .cpp files.
 cFilenames=$(find . -type f -name "*.cpp")
 
-assembly="spectre"
+assembly="overture"
 compilerFlags="-g -shared -fdeclspec -fPIC" 
 includeFlags="-Isrc"
 linkerFlags="-lstdc++"
