@@ -1,5 +1,5 @@
 # Overture
-https://img.shields.io/github/license/Sandman035/Overture?style=flat-square
+![GitHub](https://img.shields.io/github/license/Sandman035/Overture?style=flat-square)
 
 Overture is a game engine early in development.
 
