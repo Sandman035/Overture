@@ -6,7 +6,7 @@
 #include <string>
 #include <stdarg.h>
 
-API void log_output(log_level level, const char * message, ...) {
+API void logOutput(log_level level, const char * message, ...) {
     std::string level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
 
     char out_message[32000];
@@ -21,6 +21,6 @@ API void log_output(log_level level, const char * message, ...) {
     std::cout << output << "\n";
 }
 
-void assertion_failure(const char* expression, const char* message, const char* file, i32 line) {
-    log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: '%s', in file: %s, line: %d\n", expression, message, file, line);
+void assertionFailure(const char* expression, const char* message, const char* file, i32 line) {
+    logOutput(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: '%s', in file: %s, line: %d\n", expression, message, file, line);
 }

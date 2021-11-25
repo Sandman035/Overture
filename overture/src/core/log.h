@@ -22,19 +22,19 @@ typedef enum log_level {
     LOG_LEVEL_TRACE = 5
 } log_level;
 
-API void log_output(log_level level, const char * message, ...);
+API void logOutput(log_level level, const char * message, ...);
 
 // Logs a fatal-level message.
-#define FATAL(message, ...) log_output(LOG_LEVEL_FATAL, message, ##__VA_ARGS__);
+#define FATAL(message, ...) logOutput(LOG_LEVEL_FATAL, message, ##__VA_ARGS__);
 
 #ifndef ERROR
 // Logs an error-level message.
-#define ERROR(message, ...) log_output(LOG_LEVEL_ERROR, message, ##__VA_ARGS__);
+#define ERROR(message, ...) logOutput(LOG_LEVEL_ERROR, message, ##__VA_ARGS__);
 #endif
 
 #if LOG_WARN_ENABLED == 1
 // Logs a warning-level message.
-#define WARN(message, ...) log_output(LOG_LEVEL_WARN, message, ##__VA_ARGS__);
+#define WARN(message, ...) logOutput(LOG_LEVEL_WARN, message, ##__VA_ARGS__);
 #else
 // Does nothing when LOG_WARN_ENABLED != 1
 #define WARN(message, ...)
@@ -42,7 +42,7 @@ API void log_output(log_level level, const char * message, ...);
 
 #if LOG_INFO_ENABLED == 1
 // Logs a info-level message.
-#define INFO(message, ...) log_output(LOG_LEVEL_INFO, message, ##__VA_ARGS__);
+#define INFO(message, ...) logOutput(LOG_LEVEL_INFO, message, ##__VA_ARGS__);
 #else
 // Does nothing when LOG_INFO_ENABLED != 1
 #define INFO(message, ...)
@@ -50,7 +50,7 @@ API void log_output(log_level level, const char * message, ...);
 
 #if LOG_DEBUG_ENABLED == 1
 // Logs a debug-level message.
-#define DEBUG(message, ...) log_output(LOG_LEVEL_DEBUG, message, ##__VA_ARGS__);
+#define DEBUG(message, ...) logOutput(LOG_LEVEL_DEBUG, message, ##__VA_ARGS__);
 #else
 // Does nothing when LOG_DEBUG_ENABLED != 1
 #define DEBUG(message, ...)
@@ -58,7 +58,7 @@ API void log_output(log_level level, const char * message, ...);
 
 #if LOG_TRACE_ENABLED == 1
 // Logs a trace-level message.
-#define TRACE(message, ...) log_output(LOG_LEVEL_TRACE, message, ##__VA_ARGS__);
+#define TRACE(message, ...) logOutput(LOG_LEVEL_TRACE, message, ##__VA_ARGS__);
 #else
 // Does nothing when LOG_TRACE_ENABLED != 1
 #define TRACE(message, ...)

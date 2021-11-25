@@ -14,7 +14,7 @@ typedef float f32;
 typedef double f64;
 
 typedef int b32;
-typedef char b8;
+typedef bool b8;
 
 // Platform detection
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 

@@ -10,13 +10,13 @@
 #define debugBreak() __builtin_trap()
 #endif
 
-void assertion_failure(const char* expression, const char* message, const char* file, i32 line);
+void assertionFailure(const char* expression, const char* message, const char* file, i32 line);
 
 #define ASSERT(expr)                                                \ 
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
-            assertion_failure(#expr, "", __FILE__, __LINE__);       \
+            assertionFailure(#expr, "", __FILE__, __LINE__);       \
             debugBreak();                                           \
         }                                                           \
     }
@@ -25,7 +25,7 @@ void assertion_failure(const char* expression, const char* message, const char* 
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
-            assertion_failure(#expr, message, __FILE__, __LINE__);  \
+            assertionFailure(#expr, message, __FILE__, __LINE__);  \
             debugBreak();                                           \
         }                                                           \
     }
@@ -35,7 +35,7 @@ void assertion_failure(const char* expression, const char* message, const char* 
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
-            assertion_failure(#expr, "", __FILE__, __LINE__);  \
+            assertionFailure(#expr, "", __FILE__, __LINE__);  \
             debugBreak();                                           \
         }                                                           \
     }                                            
