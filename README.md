@@ -1,7 +1,7 @@
 # Overture
-![alt text](https://github.com/Sandman035/Overture/blob/main/res/branding/overturelogo.png?raw=true)
+![GitHub](https://img.shields.io/github/license/Sandman034/Overture?style=flat-square)
 
-![GitHub](https://img.shields.io/github/license/Sandman035/Overture?style=flat-square)
+![alt text](https://github.com/Sandman035/Overture/blob/main/res/branding/overturelogo.png?raw=true)
 
 Overture is a game engine early in development.
 
