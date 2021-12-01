@@ -11,9 +11,9 @@ int main(int argc, char const *argv[])
 
     DEBUG("%f, %f, %f", thing3.x, thing3.y, thing3.z);
 
-    if(Vector3(1.0f, 0.0f, 0.0f) == Vector3(0.0f, 0.0f, 0.0f))
+    if(Vector3(0.0f, 0.0f, 0.0f) == Vector3(0.0f, 0.0f, 0.0f))
         DEBUG("equal");
-    if (Vector3(0.0f, 0.0f, 0.0f) != Vector3(0.0f, 0.0f, 0.0f))
+    if (Vector3(1.0f, 0.0f, 0.0f) != Vector3(0.0f, 0.0f, 0.0f))
         DEBUG("not equal")
 
     return 0;
