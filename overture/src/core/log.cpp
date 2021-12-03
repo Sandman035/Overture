@@ -1,5 +1,6 @@
 #include <core/log.h>
 #include <core/asserts.h>
+#include <platform/platform.h>
 
 #include <iostream>
 #include <cstring>
@@ -18,7 +19,8 @@ API void logOutput(log_level level, const char * message, ...) {
     va_end(arg_ptr);
 
     std::string output = level_strings[level] + out_message;
-    std::cout << output << "\n";
+    ConsolePrint(output, level);
+    
 }
 
 void assertionFailure(const char* expression, const char* message, const char* file, i32 line) {

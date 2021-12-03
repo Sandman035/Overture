@@ -12,7 +12,7 @@
 
 void assertionFailure(const char* expression, const char* message, const char* file, i32 line);
 
-#define ASSERT(expr)                                                \ 
+#define ASSERT(expr)                                                \
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
@@ -21,7 +21,7 @@ void assertionFailure(const char* expression, const char* message, const char* f
         }                                                           \
     }
 
-#define ASSERT_MSG(expr, message)                                   \ 
+#define ASSERT_MSG(expr, message)                                   \
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
@@ -31,7 +31,7 @@ void assertionFailure(const char* expression, const char* message, const char* f
     }
 
 #ifdef _DEBUG
-#define ASSERT_DEBUG(expr)                                          \ 
+#define ASSERT_DEBUG(expr)                                          \
     {                                                               \
         if (expr) {                                                 \
         } else {                                                    \
