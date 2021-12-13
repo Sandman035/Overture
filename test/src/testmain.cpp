@@ -3,6 +3,16 @@
 #include <core/log.h>
 #include <core/asserts.h>
 #include <math/math.h>
+#include <core/event.h>
+
+class TestEvent : public Event {
+    public:
+        TestEvent();
+};
+
+void onTestEvent(TestEvent * event) {
+    DEBUG("hello there");
+}
 
 void applicationLoop()
 {
@@ -21,5 +31,8 @@ void applicationLoop()
     FATAL("hello");
     WARN("hi");
     INFO("fish");
-
+    
+    EventBus eventBus;
+    eventBus.subscribe(&onTestEvent);
+    eventBus.publish(new TestEvent);
 }

@@ -15,5 +15,11 @@ struct WindowProperties {
 
 class Window {
     public:
+        u32 width;
+        u32 height;
+
         static Window create(const WindowProperties& properties = WindowProperties());
+
+        void setIcon( /* image */ );
+        // more actions similar to set icon
 };
