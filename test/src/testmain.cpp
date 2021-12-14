@@ -7,7 +7,7 @@
 
 class TestEvent : public Event {
     public:
-        TestEvent();
+//        TestEvent();
 };
 
 void onTestEvent(TestEvent * event) {
