@@ -1,33 +1,36 @@
 #pragma once
 
+#include <defines.h>
+
 #include <list>
 #include <map>
 #include <typeindex>
 
-class Event { 
-protected: 
-	virtual ~Event() {}; 
-}; 
+class Event {
+    protected:
+        virtual ~Event();
+};
 
-class HandlerFunctionBase { 
-public: 
-	virtual ~HandlerFunctionBase() {}; 
-	void exec(Event* event) {call(event);} 
-	
-private: 
-	virtual void call(Event * event) = 0; 
-}; 
+class HandlerFunctionBase {
+    public:
+        void exec(Event * event) {
+            call(event);
+        }
+    private:
+        virtual void call(Event * event) = 0;
+};
 
+template <class EventType, class MemberFunction>
 class MemberFunctionHandler : public HandlerFunctionBase {
     public:
-        MemberFunctionHandler(void (*memberFunction)(Event*)) {_memberFunction = *memberFunction;};
+        MemberFunctionHandler(MemberFunction memberFunction) {_memberFunction = memberFunction;};
 
         void call(Event * event) {
-            (_memberFunction)(event);
+            (_memberFunction)(static_cast<EventType*>(event));
         }
-
+    
     private:
-        void (*_memberFunction)(Event*);
+        MemberFunction _memberFunction;
 };
 
 typedef std::list<HandlerFunctionBase*> HandlerList;
@@ -37,23 +40,27 @@ class EventBus {
         void publish(EventType * event) {
             HandlerList * handlers = subscribers[typeid(EventType)];
 
-            for(auto & handler : *handlers) {
+            if (handlers == nullptr) {
+                return;
+            }
+
+            for (auto & handler : *handlers) {
                 if (handler != nullptr) {
                     handler->exec(event);
                 }
             }
         }
-        
+
         template<class EventType>
-        void subscribe(void (*memberFunction)(EventType *)) {
+        void subscribe(void (memberFunction)(EventType *)) {
             HandlerList * handlers = subscribers[typeid(EventType)];
 
             if(handlers == nullptr) {
                 handlers = new HandlerList();
                 subscribers[typeid(EventType)] = handlers;
             }
-            MemberFunctionHandler thingy((const MemberFunctionHandler &)memberFunction);
-            handlers->push_back((HandlerFunctionBase *)&thingy);
+            MemberFunctionHandler <EventType, void (*)(EventType *)>thingy(memberFunction);
+            handlers->push_back(&thingy);
         }
     private:
         std::map<std::type_index, HandlerList*> subscribers;
