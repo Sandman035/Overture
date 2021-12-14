@@ -7,11 +7,15 @@
 
 class TestEvent : public Event {
     public:
-//        TestEvent();
+        //TestEvent();
 };
 
 void onTestEvent(TestEvent * event) {
     DEBUG("hello there");
+}
+
+void test(TestEvent * event) {
+    DEBUG("hello again");
 }
 
 void applicationLoop()
@@ -34,5 +38,6 @@ void applicationLoop()
     
     EventBus eventBus;
     eventBus.subscribe(&onTestEvent);
+    eventBus.subscribe(&test);
     eventBus.publish(new TestEvent);
 }
