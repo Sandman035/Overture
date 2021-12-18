@@ -5,17 +5,8 @@
 #include <math/math.h>
 #include <core/event.h>
 
-class TestEvent : public Event {
-    public:
-        //TestEvent();
-};
-
-void onTestEvent(TestEvent * event) {
-    DEBUG("hello there");
-}
-
-void test(TestEvent * event) {
-    DEBUG("hello again");
+void eventTest() {
+    DEBUG("this fucking worked");
 }
 
 void applicationLoop()
@@ -35,9 +26,8 @@ void applicationLoop()
     FATAL("hello");
     WARN("hi");
     INFO("fish");
-    
+
     EventBus eventBus;
-    eventBus.subscribe(&onTestEvent);
-    eventBus.subscribe(&test);
-    eventBus.publish(new TestEvent);
+    eventBus.bind("test", &eventTest);
+    eventBus.call("test");
 }
