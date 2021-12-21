@@ -5,8 +5,18 @@
 #include <math/math.h>
 #include <core/event.h>
 
+#include <platform/window.h>
+
 void eventTest() {
     DEBUG("this fucking worked");
+}
+
+void event2() {
+    DEBUG("this too works");
+}
+
+void event56() {
+    DEBUG("I'm surprized");
 }
 
 void applicationLoop()
@@ -29,5 +39,18 @@ void applicationLoop()
 
     EventBus eventBus;
     eventBus.bind("test", &eventTest);
+    eventBus.bind("test", &event2);
+    eventBus.bind("test2", &event56);
     eventBus.call("test");
+    eventBus.call("test2");
+    eventBus.call("test3");
+
+    WindowProperties props;
+    props.width = 1920;
+    props.height = 1080;
+    
+    Window window;
+
+    window.init(props);
+    window.run();
 }

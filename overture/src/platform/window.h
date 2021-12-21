@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include <GLFW/glfw3.h>
+
 struct WindowProperties {
     u32 width;
     u32 height;
@@ -17,8 +19,15 @@ class Window {
     public:
         u32 width;
         u32 height;
+        GLFWwindow * window;
 
-        static Window create(const WindowProperties& properties = WindowProperties());
+        void init(const WindowProperties& properties = WindowProperties());
+        void shutdown();
+
+        void run();
+        void onUpdate();
+
+        //TODO: on error callback, etc.
 
         void setIcon( /* image */ );
         // more actions similar to set icon
