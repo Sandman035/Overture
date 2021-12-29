@@ -12,7 +12,7 @@ struct WindowProperties {
 
     std::string title;
 
-    WindowProperties(u32 width = 800, u32 height = 600, std::string title = "Overture"): width(width), height(height), title(title) {};
+    WindowProperties(const std::string& title = "Overture", u32 width = 800, u32 height = 600): width(width), height(height), title(title) {};
 };
 
 class Window {
