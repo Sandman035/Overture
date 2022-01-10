@@ -1,3 +1,4 @@
+#include <GLFW/glfw3.h>
 #include <platform/window.h>
 
 #include <core/asserts.h>
@@ -5,6 +6,11 @@
 
 void Window::init(const WindowProperties& properties) {
     ASSERT_MSG(glfwInit(), "glfw failed to initialize");
+	
+	//TODO: make this part allow different apis
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+	glfwSetErrorCallback(onErrorCallback);
 
     window = glfwCreateWindow(properties.width, properties.height, properties.title.c_str(), NULL, nullptr);
 
@@ -20,7 +26,6 @@ void Window::shutdown() {
 
 void Window::onUpdate() {
     glfwPollEvents();
-    glfwSwapBuffers(window);
 }
 
 void Window::run() {
@@ -30,4 +35,8 @@ void Window::run() {
     }
 
     shutdown();
+}
+
+void Window::onErrorCallback(i32 code, const char *description) {
+	ERROR("GLFW [%d]: %s", code, description);
 }

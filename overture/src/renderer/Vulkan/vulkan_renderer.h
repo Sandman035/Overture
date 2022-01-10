@@ -11,9 +11,10 @@
 
 struct QueueFamilyIndices {
 	std::optional<uint32_t> graphicsFamily;
+	std::optional<uint32_t> presentFamily;
 
 	b8 isComplete() {
-		return graphicsFamily.has_value();
+		return graphicsFamily.has_value() && presentFamily.has_value();
 	}
 };
 
@@ -52,6 +53,8 @@ class VulkanRenderer {
 		VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 		VkDevice logicalDevice;
 		VkQueue graphicsQueue;
+		VkSurfaceKHR surface;
+		VkQueue presentQueue;
 
 		const std::vector<const char*> validationLayers = {
     		"VK_LAYER_KHRONOS_validation"

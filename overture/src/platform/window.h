@@ -27,6 +27,8 @@ class Window {
         void run();
         void onUpdate();
 
+		static void onErrorCallback(i32 code, const char* description);
+
         //TODO: on error callback, etc.
 
         void setIcon( /* image */ );
