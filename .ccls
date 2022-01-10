@@ -1,0 +1,4 @@
+clang
+%c
+-Ioverture/src/
+-std=c++

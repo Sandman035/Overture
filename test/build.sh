@@ -10,7 +10,7 @@ cFilenames=$(find . -type f -name "*.cpp")
 # echo "Files:" $cFilenames
 
 assembly="testbed"
-compilerFlags="-g -fdeclspec -fPIC" 
+compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
 includeFlags="-Isrc -I../overture/src/"
 linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++"
 defines="-D_DEBUG -DIMPORT"

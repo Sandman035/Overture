@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/layer.h>
+#include <renderer/Vulkan/vulkan_renderer.h>
 
 class TestLayer : public Layer {
     public:
@@ -10,4 +11,6 @@ class TestLayer : public Layer {
         void update() override;
 
         void start() override;
+
+		VulkanRenderer renderer;
 };

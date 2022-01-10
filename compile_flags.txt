@@ -1,0 +1,3 @@
+-Ioverture/src
+-xc++
+-std=c++17
