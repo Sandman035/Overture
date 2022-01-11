@@ -38,7 +38,7 @@ class VulkanRenderer {
 		VkPhysicalDevice pickPhysicalDevice();
 		void createLogicalDevice();
 		void createSwapChain();
-		void createSwapChainImageViews();
+		void createImageViews();
 		void createRenderPasses();
 		
 		b8 checkValidationLayerSupport();
@@ -70,6 +70,8 @@ class VulkanRenderer {
 		VkSwapchainKHR swapChain;
 
 		std::vector<VkImage> swapChainImages;
+		std::vector<VkImageView> swapChainImageViews;
+
 		VkFormat swapChainImageFormat;
 		VkExtent2D swapChainExtent;
 
