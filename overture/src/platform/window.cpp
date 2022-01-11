@@ -15,8 +15,6 @@ void Window::init(const WindowProperties& properties) {
     window = glfwCreateWindow(properties.width, properties.height, properties.title.c_str(), NULL, nullptr);
 
     ASSERT_MSG(window, "failed to create window");
-
-    glfwMakeContextCurrent(window);
 }
 
 void Window::shutdown() {

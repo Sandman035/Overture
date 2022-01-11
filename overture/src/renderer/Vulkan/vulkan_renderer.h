@@ -18,6 +18,12 @@ struct QueueFamilyIndices {
 	}
 };
 
+struct SwapChainSupportDetails {
+    VkSurfaceCapabilitiesKHR capabilities;
+    std::vector<VkSurfaceFormatKHR> formats;
+    std::vector<VkPresentModeKHR> presentModes;
+};
+
 class VulkanRenderer {
 	public:
 		void init();
@@ -43,10 +49,16 @@ class VulkanRenderer {
 		void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
 
 		b8 isDeviceSuitable(VkPhysicalDevice device);
+		b8 checkDeviceExtensionSupport(VkPhysicalDevice device);
 
 		std::vector<const char*> getRequiredExtensions();
 
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+
+		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+		VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+		VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+		VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		VkInstance instance;
 		VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
@@ -55,8 +67,17 @@ class VulkanRenderer {
 		VkQueue graphicsQueue;
 		VkSurfaceKHR surface;
 		VkQueue presentQueue;
+		VkSwapchainKHR swapChain;
+
+		std::vector<VkImage> swapChainImages;
+		VkFormat swapChainImageFormat;
+		VkExtent2D swapChainExtent;
 
 		const std::vector<const char*> validationLayers = {
     		"VK_LAYER_KHRONOS_validation"
+		};
+
+		const std::vector<const char*> deviceExtensions = {
+		    VK_KHR_SWAPCHAIN_EXTENSION_NAME
 		};
 };
