@@ -3,11 +3,16 @@
 #include <cstdint>
 #include <defines.h>
 
+#include <string>
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
 
 #include <vector>
 #include <optional>
+
+//TODO: move this to platform
+#include <fstream>
+std::vector<char> readFile(const std::string& filename);
 
 struct QueueFamilyIndices {
 	std::optional<uint32_t> graphicsFamily;
@@ -39,7 +44,8 @@ class VulkanRenderer {
 		void createLogicalDevice();
 		void createSwapChain();
 		void createImageViews();
-		void createRenderPasses();
+		void createGraphicsPipeline();
+		void createRenderPass();
 		
 		b8 checkValidationLayerSupport();
 		b8 validationLayerSupported;
@@ -60,6 +66,8 @@ class VulkanRenderer {
 		VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 		VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
+		VkShaderModule createShaderModule(const std::vector<char>& code);
+
 		VkInstance instance;
 		VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
 		VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
@@ -68,6 +76,8 @@ class VulkanRenderer {
 		VkSurfaceKHR surface;
 		VkQueue presentQueue;
 		VkSwapchainKHR swapChain;
+		VkRenderPass renderPass;
+		VkPipelineLayout pipelineLayout;
 
 		std::vector<VkImage> swapChainImages;
 		std::vector<VkImageView> swapChainImageViews;
