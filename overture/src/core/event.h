@@ -8,6 +8,7 @@
 typedef std::list<void (*)()> functionList;
 
 class EventBus {
+	public:
         void bind(const char* event, void (* function)());
         void call(const char* event); 
     private:

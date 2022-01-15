@@ -16,6 +16,8 @@ void TestLayer::update() {
 		renderer.shutdown();
         Application::get().close();        
     }
+
+	renderer.drawFrame();
 }
 
 void TestLayer::start() {
