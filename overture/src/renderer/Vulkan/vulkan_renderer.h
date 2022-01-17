@@ -77,6 +77,15 @@ const std::vector<uint16_t> indices = {
     0, 1, 2, 2, 3, 0
 };
 
+
+#include <glm/glm.hpp>
+
+struct UniformBufferObject {
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
+};
+
 class VulkanRenderer {
 	public:
 		void init();
@@ -101,6 +110,11 @@ class VulkanRenderer {
 		void createSyncObjects();
 		void recreateSwapChain();
 		void cleanupSwapChain();
+		void createDescriptorSetLayout();
+		void createUniformBuffers();
+		void updateUniformBuffer(uint32_t currentImage);
+		void createDescriptorPool();
+		void createDescriptorPoolSets();
 
 		void createVertexBuffer();
 		void createIndexBuffer();
@@ -139,6 +153,7 @@ class VulkanRenderer {
 		VkQueue presentQueue;
 		VkSwapchainKHR swapChain;
 		VkRenderPass renderPass;
+		VkDescriptorSetLayout descriptorSetLayout;
 		VkPipelineLayout pipelineLayout;
 		VkPipeline graphicsPipeline;
 		VkCommandPool commandPool;
@@ -146,6 +161,11 @@ class VulkanRenderer {
 		VkDeviceMemory vertexBufferMemory;
 		VkBuffer indexBuffer;
 		VkDeviceMemory indexBufferMemory;
+		VkDescriptorPool descriptorPool;
+		std::vector<VkDescriptorSet> descriptorSets;
+
+		std::vector<VkBuffer> uniformBuffers;
+		std::vector<VkDeviceMemory> uniformBuffersMemory;
 
 		std::vector<VkSemaphore> imageAvailableSemaphores;
 		std::vector<VkSemaphore> renderFinishedSemaphores;

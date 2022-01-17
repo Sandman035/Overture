@@ -64,8 +64,8 @@ typedef bool b8;
 #define API
 #endif
 
-#ifdef D_DEBUG
-#define RELEASE 1
-#else
+#ifdef _DEBUG
 #define RELEASE 0
+#else
+#define RELEASE 1
 #endif

@@ -11,32 +11,19 @@ class Vector3 {
 
         Vector3 dot(Vector3);
 
-        Vector3 operator+ (const Vector3& n) {
-            return Vector3(x+n.x, y+n.y, z+n.z);
-        }
+        Vector3 operator+ (const Vector3& n);
 
-        Vector3 operator- (const Vector3& n) {
-            return Vector3(x-n.x, y-n.y, z-n.z);
-        }
+        Vector3 operator- (const Vector3& n);
 
         template <typename type>
-        Vector3 operator* (const type& n) {
-            return Vector3(x*(f32)n, y*(f32)n, z*(f32)n);
-        }
+        Vector3 operator* (const type& n);
 
         template <typename type>
-        Vector3 operator/ (const type& n) {
-            return Vector3(x/(float)n, y/(f32)n, z/(f32)n);
-        }
+        Vector3 operator/ (const type& n);
 
-        b8 operator== (const Vector3& n) {
-            return x==n.x && y==n.y && z==n.z;
-        }
+        b8 operator== (const Vector3& n);
 
-        b8 operator!= (const Vector3& n) {
-            b8 value = x==n.x && y==n.y && z==n.z;
-            return !value;
-        }
+        b8 operator!= (const Vector3& n);
 };
 
 class Vector2 {
@@ -48,30 +35,31 @@ class Vector2 {
 
         Vector2 dot(Vector2);
 
-        Vector2 operator+ (const Vector2& n) {
-            return Vector2(x+n.x, y+n.y);
-        }
+        Vector2 operator+ (const Vector2& n);
 
-        Vector2 operator- (const Vector2& n) {
-            return Vector2(x-n.x, y-n.y);
-        }
+        Vector2 operator- (const Vector2& n);
 
         template <typename type>
-        Vector2 operator* (const type& n) {
-            return Vector2(x*(f32)n, y*(f32)n);
-        }
+        Vector2 operator* (const type& n);
 
         template <typename type>
-        Vector2 operator/ (const type& n) {
-            return Vector2(x/(float)n, y/(f32)n);
-        }
+        Vector2 operator/ (const type& n);
 
-        b8 operator== (const Vector2& n) {
-            return x==n.x && y==n.y;
-        }
+        b8 operator== (const Vector2& n);
 
-        b8 operator!= (const Vector2& n) {
-            b8 value = x==n.x && y==n.y;
-            return !value;
-        }
+        b8 operator!= (const Vector2& n);
+};
+
+class Mat4 {
+	public:
+		f32 matrixData[16]={0};
+
+		Mat4() = default;
+		Mat4(f32 m0,f32 m4,f32 m8,f32 m12,f32 m1,f32 m5,f32 m9,f32 m13,f32 m2,f32 m6,f32 m10,f32 m14,f32 m3,f32 m7, f32 m11,f32 m15);
+
+		Mat4 operator= (const Mat4& n);
+		f32 operator[] (const i32 n);
+		Mat4 scale(const Vector3& n);
+		Mat4 translate(const Vector3& n);
+		Mat4 rotate(const Vector3& n);
 };

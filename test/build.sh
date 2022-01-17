@@ -13,7 +13,7 @@ assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
 includeFlags="-Isrc -I../overture/src/"
 linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++"
-defines="-D_DEBUG -DIMPORT"
+defines=" -D_DEBUG -DIMPORT"
 
 echo "Building $assembly..."
 echo clang $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
