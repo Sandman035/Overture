@@ -1,3 +1,4 @@
 -Ioverture/src
+-Ioverture/deps/include
 -xc++
 -std=c++17

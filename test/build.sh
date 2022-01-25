@@ -11,9 +11,10 @@ cFilenames=$(find . -type f -name "*.cpp")
 
 assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
-includeFlags="-Isrc -I../overture/src/"
+includeFlags="-Isrc -I../overture/src/ -I../overture/deps/include/"
 linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++"
 defines=" -D_DEBUG -DIMPORT"
+#defines="-DIMPORT"
 
 echo "Building $assembly..."
 echo clang $cFilenames $compilerFlags -o ../bin/$assembly $defines $includeFlags $linkerFlags
