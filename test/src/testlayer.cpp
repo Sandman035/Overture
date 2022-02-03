@@ -13,14 +13,10 @@ void TestLayer::update() {
     }
 
     if(Input::isKeyPressed(Escape)) {
-		renderer.shutdown();
         Application::get().close();        
     }
-
-	renderer.drawFrame();
 }
 
 void TestLayer::start() {
     DEBUG("it works");
-	renderer.init();
 }

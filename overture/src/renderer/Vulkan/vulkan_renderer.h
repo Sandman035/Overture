@@ -1,5 +1,7 @@
 #pragma once
 
+#include <renderer/renderer.h>
+
 #include <cstdint>
 #include <defines.h>
 
@@ -14,10 +16,6 @@
 
 #include <math/math.h>
 #include <array>
-
-//TODO: move this to platform
-#include <fstream>
-std::vector<char> readFile(const std::string& filename);
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -101,14 +99,15 @@ struct UniformBufferObject {
 	glm::mat4 proj;
 };
 
-class VulkanRenderer {
+class VulkanRenderer final : public Renderer {
 	public:
-		void init();
-		void shutdown();
+		virtual void init() override;
+		virtual void shutdown() override;
 
-		void drawFrame();
+		virtual void drawFrame() override;
 		
 		static void onResize(GLFWwindow* window, i32 width, i32 height);
+
 	private:
 		b8 createInstance();
 		void setupDebugCallback();

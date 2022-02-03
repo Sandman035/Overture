@@ -3,6 +3,7 @@
 #include <defines.h>
 #include <platform/window.h>
 #include <core/layer.h>
+#include <renderer/renderer.h>
 
 #include <string>
 #include <list>
@@ -38,6 +39,9 @@ class Application {
         ApplicationCommandLineArgs args;
         static Application* instance;
         std::list<Layer*> layers;
+
+		Renderer* renderer;
+
         void onWindowResize(); //will be needed later for rendering
 };
 

@@ -6,6 +6,7 @@
 #include <core/log.h>
 #include <core/asserts.h>
 #include <core/application.h>
+#include <platform/platform.h>
 #include <platform/window.h>
 #include <math/math.h>
 
@@ -1410,7 +1411,7 @@ void VulkanRenderer::updateUniformBuffer(uint32_t currentImage) {
     float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
 
 	UniformBufferObject ubo{};
-	ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	ubo.model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f) * time / 2, glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float) swapChainExtent.height, 0.1f, 10.0f);
     ubo.proj[1][1] *= -1;
@@ -1500,24 +1501,4 @@ void VulkanRenderer::loadModel() {
        		indices.push_back(uniqueVertices[vertex]);
     	}
 	}
-}
-
-//TODO: move this
-std::vector<char> readFile(const std::string& filename) {
-	std::ifstream file(filename, std::ios::ate | std::ios::binary);
-
-	if(!file.is_open()) {
-		ERROR("failed to open file: %s", filename.c_str());
-		return {};
-	}
-
-	size_t fileSize = (size_t) file.tellg();
-	std::vector<char> buffer(fileSize);
-
-	file.seekg(0);
-	file.read(buffer.data(), fileSize);
-
-	file.close();
-
-	return buffer;
 }
