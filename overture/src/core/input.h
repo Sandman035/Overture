@@ -2,7 +2,8 @@
 
 #include <defines.h>
 
-#include <math/math.h>
+#include <glm/glm.hpp>
+
 #include <core/keycodes.h>
 #include <core/mousecodes.h>
 
@@ -13,7 +14,7 @@ class Input {
         static b8 isMouseButtonPressed(const mouseCode code);
         //static b8 isMouseButtonJustPressed(const mouseCode code);
 
-        static Vector2 getMousePos();
+        static glm::vec2 getMousePos();
         static f32 getMouseX();
         static f32 getMouseY();
 };

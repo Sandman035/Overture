@@ -15,11 +15,11 @@ b8 Input::isMouseButtonPressed(const mouseCode code) {
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-Vector2 Input::getMousePos() {
+glm::vec2 Input::getMousePos() {
     GLFWwindow* window = Application::get().getWindow().window;
     double x, y;
     glfwGetCursorPos(window, &x, &y);
-    return Vector2((float)x, (float)y);
+    return glm::vec2((float)x, (float)y);
 }
 
 float Input::getMouseX() {

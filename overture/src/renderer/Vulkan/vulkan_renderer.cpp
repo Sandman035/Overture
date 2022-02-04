@@ -8,7 +8,6 @@
 #include <core/application.h>
 #include <platform/platform.h>
 #include <platform/window.h>
-#include <math/math.h>
 
 #include <string>
 #include <vector>
@@ -34,8 +33,6 @@
 #else
 #define VALIDATION_LAYER_ENABLED true
 #endif
-
-bool VulkanRenderer::framebufferResized = false;
 
 void VulkanRenderer::init() {
 	validationLayerSupported = checkValidationLayerSupport();
@@ -226,8 +223,8 @@ void VulkanRenderer::drawFrame() {
 
 	result = vkQueuePresentKHR(presentQueue, &presentInfo);
 
-	if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || framebufferResized) {
-		framebufferResized = false;
+	if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || Application::get().isResized()) {
+		Application::get().setResized(false);
 	    recreateSwapChain();
 	} else if (result != VK_SUCCESS) {
 	    ERROR("failed to present swap chain image!");
@@ -1447,7 +1444,7 @@ uint32_t VulkanRenderer::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFla
 }
 
 void VulkanRenderer::onResize(GLFWwindow* window, i32 width, i32 height) {
-	framebufferResized = true;
+	Application::get().setResized(true);
 }
 
 VkShaderModule VulkanRenderer::createShaderModule(const std::vector<char>& code) {

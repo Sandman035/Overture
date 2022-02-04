@@ -14,7 +14,6 @@
 
 #include <GLFW/glfw3.h>
 
-#include <math/math.h>
 #include <array>
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
@@ -54,7 +53,7 @@ struct Vertex {
 		bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 
     	return bindingDescription;
-}
+	}
 
 	static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() {
         std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
@@ -216,8 +215,6 @@ class VulkanRenderer final : public Renderer {
 		std::vector<VkFence> inFlightFences;
 		std::vector<VkFence> imagesInFlight;
 		size_t currentFrame = 0;
-
-		static bool framebufferResized;
 
 		std::vector<VkImage> swapChainImages;
 		std::vector<VkImageView> swapChainImageViews;

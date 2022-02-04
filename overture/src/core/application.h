@@ -5,6 +5,8 @@
 #include <core/layer.h>
 #include <renderer/renderer.h>
 
+#include <GLFW/glfw3.h>
+
 #include <string>
 #include <list>
 
@@ -32,17 +34,23 @@ class Application {
 
         static Application& get() { return *instance; }
         Window& getWindow() { return *window; }
+
+		b8 isResized() { return resized; }
+		void setResized(b8 value) { resized = value; }
+
     private:
         b8 running = true;
         b8 minimized = false;
+		b8 resized;
+
         Window *window;
         ApplicationCommandLineArgs args;
         static Application* instance;
         std::list<Layer*> layers;
 
 		Renderer* renderer;
-
-        void onWindowResize(); //will be needed later for rendering
 };
+
+void onWindowResize(GLFWwindow* window, i32 width, i32 height); //will be needed later for rendering
 
 Application* createApplication(ApplicationCommandLineArgs args);
