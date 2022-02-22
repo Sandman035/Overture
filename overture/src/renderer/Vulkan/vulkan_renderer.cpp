@@ -1036,6 +1036,10 @@ void VulkanRenderer::createTextureImage() {
     vkFreeMemory(logicalDevice, stagingBufferMemory, nullptr);
 }
 
+void VulkanRenderer::initTextureFromFile(const std::string& relativePath, b8 flipVertically) {
+	//create texture and later return texture id
+}
+
 void VulkanRenderer::createTextureImageView() {
 	textureImageView = createImageView(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_ASPECT_COLOR_BIT);
 }
@@ -1396,12 +1400,12 @@ void VulkanRenderer::createDescriptorPoolSets() {
 	}
 }
 
-//TODO: remove after fixing math.h
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/gtc/matrix_transform.hpp>
 
 void VulkanRenderer::updateUniformBuffer(uint32_t currentImage) {
+	//remove this time thing
 	static auto startTime = std::chrono::high_resolution_clock::now();
 
     auto currentTime = std::chrono::high_resolution_clock::now();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <renderer/renderer.h>
+#include <renderer/Vulkan/vulkan_helpers.h>
 
 #include <cstdint>
 #include <defines.h>
@@ -10,7 +11,6 @@
 #include <vulkan/vulkan_core.h>
 
 #include <vector>
-#include <optional>
 
 #include <GLFW/glfw3.h>
 
@@ -21,22 +21,6 @@ const int MAX_FRAMES_IN_FLIGHT = 2;
 const std::string MODEL_PATH = "../overture/res/viking_room.obj";
 const std::string TEXTURE_PATH = "../overture/res/viking_room.png";
 
-struct QueueFamilyIndices {
-	std::optional<uint32_t> graphicsFamily;
-	std::optional<uint32_t> presentFamily;
-
-	b8 isComplete() {
-		return graphicsFamily.has_value() && presentFamily.has_value();
-	}
-};
-
-struct SwapChainSupportDetails {
-    VkSurfaceCapabilitiesKHR capabilities;
-    std::vector<VkSurfaceFormatKHR> formats;
-    std::vector<VkPresentModeKHR> presentModes;
-};
-
-//TODO: remove after fixing math.h
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
@@ -92,12 +76,6 @@ namespace std {
     };
 }
 
-struct UniformBufferObject {
-	glm::mat4 model;
-	glm::mat4 view;
-	glm::mat4 proj;
-};
-
 class VulkanRenderer final : public Renderer {
 	public:
 		virtual void init() override;
@@ -106,6 +84,8 @@ class VulkanRenderer final : public Renderer {
 		virtual void drawFrame() override;
 		
 		static void onResize(GLFWwindow* window, i32 width, i32 height);
+
+		virtual void initTextureFromFile(const std::string& relativePath, b8 flipVertically) override;
 
 	private:
 		b8 createInstance();

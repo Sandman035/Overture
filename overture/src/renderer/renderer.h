@@ -11,5 +11,5 @@ class Renderer {
 
         virtual void drawFrame() = 0;
 
-		//virtual void initTextureFromFile(const std::string& relativePath, b8 flipVertically) = 0;
+		virtual void initTextureFromFile(const std::string& relativePath, b8 flipVertically) = 0;
 };
