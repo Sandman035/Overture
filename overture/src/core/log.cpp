@@ -7,6 +7,8 @@
 #include <string>
 #include <stdarg.h>
 
+#include <time.h>
+
 API void logOutput(log_level level, const char * message, ...) {
     std::string level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
 
@@ -18,7 +20,15 @@ API void logOutput(log_level level, const char * message, ...) {
     vsnprintf(out_message, 32000, message, arg_ptr);
     va_end(arg_ptr);
 
-    std::string output = level_strings[level] + out_message;
+	char buff[23];
+    struct tm *sTm;
+
+    time_t now = time(0);
+    sTm = localtime(&now);
+
+    strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S] ", sTm);
+
+    std::string output = buff + level_strings[level] + out_message;
     ConsolePrint(output, level);
     
 }
