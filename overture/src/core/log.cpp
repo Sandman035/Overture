@@ -10,7 +10,7 @@
 #include <time.h>
 
 API void logOutput(log_level level, const char * message, ...) {
-    std::string level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
+    std::string level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "};
 
     char out_message[32000];
     memset(out_message, 0, sizeof(out_message));
