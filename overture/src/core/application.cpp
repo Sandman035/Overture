@@ -1,7 +1,6 @@
 #include <core/application.h>
 #include <core/log.h>
 #include <core/asserts.h>
-#include <renderer/Vulkan/vulkan_renderer.h>
 
 Application* Application::instance = nullptr;
 
@@ -10,8 +9,6 @@ Application::Application(const std::string& name, ApplicationCommandLineArgs arg
     instance = this;
     window = new Window;
     window->init(WindowProperties(name));
-	renderer = new VulkanRenderer;
-	renderer->init();
 }
 
 Application::~Application() {
@@ -31,7 +28,6 @@ void Application::run() {
                 i->update();
             }
         }
-		renderer->drawFrame();
         window->onUpdate();
 
         //temporay fix will be changed later to use the event system
@@ -40,7 +36,6 @@ void Application::run() {
         }
     }
 
-	renderer->shutdown();
     window->shutdown();
 }
 

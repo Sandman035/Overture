@@ -3,7 +3,6 @@
 #include <defines.h>
 #include <platform/window.h>
 #include <core/layer.h>
-#include <renderer/renderer.h>
 
 #include <GLFW/glfw3.h>
 
@@ -47,8 +46,6 @@ class Application {
         ApplicationCommandLineArgs args;
         static Application* instance;
         std::list<Layer*> layers;
-
-		Renderer* renderer;
 };
 
 void onWindowResize(GLFWwindow* window, i32 width, i32 height); //will be needed later for rendering
