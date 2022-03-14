@@ -13,7 +13,7 @@ assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
 includeFlags="-Isrc -I../overture/src/ -I../overture/deps/include/"
 linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++"
-defines=" -D_DEBUG -DIMPORT"
+defines=" -D_DEBUG -DIMPORT -DBX_CONFIG_DEBUG"
 #defines="-DIMPORT"
 
 echo "Building $assembly..."

@@ -19,9 +19,15 @@ struct ApplicationCommandLineArgs {
 	}
 };
 
+struct ApplicationInfo {
+	i32 width = 600;
+	i32 height = 800;
+	std::string name = "Overture";
+};
+
 class Application {
     public:
-        Application(const std::string& name = "Overture", ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
+        Application(ApplicationInfo info, ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
         virtual ~Application();
         
         void onEvent();
@@ -32,7 +38,7 @@ class Application {
         void pushLayer(Layer * layer);
 
         static Application& get() { return *instance; }
-        Window& getWindow() { return *window; }
+        OvertureWindow& getWindow() { return *window; }
 
 		b8 isResized() { return resized; }
 		void setResized(b8 value) { resized = value; }
@@ -42,7 +48,7 @@ class Application {
         b8 minimized = false;
 		b8 resized;
 
-        Window *window;
+        OvertureWindow *window;
         ApplicationCommandLineArgs args;
         static Application* instance;
         std::list<Layer*> layers;

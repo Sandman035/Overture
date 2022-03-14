@@ -10,8 +10,8 @@ cFilenames=$(find . -type f -name "*.cpp")
 assembly="overture"
 compilerFlags="-g -shared -fdeclspec -fPIC -std=c++17" 
 includeFlags="-Isrc -Ideps/include"
-linkerFlags="-lstdc++ -lglfw -lrt -lm -ldl -lX11 -lpthread -lxcb -lXau -lXdmcp -lvulkan"
-defines="-D_DEBUG -DEXPORT"
+linkerFlags="-lstdc++ -lglfw -lrt -lm -ldl -lX11 -lpthread -lxcb -lXau -lXdmcp -lvulkan -lbgfx"
+defines="-D_DEBUG -DEXPORT -DBX_CONFIG_DEBUG"
 #defines="-DEXPORT"
 
 echo "Building $assembly..."

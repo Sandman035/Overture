@@ -30,7 +30,7 @@ struct WindowProperties {
     WindowProperties(const std::string& title = "Overture", u32 width = 800, u32 height = 600): width(width), height(height), title(title) {};
 };
 
-class Window {
+class OvertureWindow {
     public:
         u32 width;
         u32 height;

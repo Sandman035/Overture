@@ -2,3 +2,4 @@
 -Ioverture/deps/include
 -xc++
 -std=c++17
+-DBX_CONFIG_DEBUG

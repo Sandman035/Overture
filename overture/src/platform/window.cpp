@@ -28,30 +28,32 @@ void WindowEventBus::call(WindowEvents event, GLFWwindow* window, i32 width, i32
 	}
 }
 
-void Window::init(const WindowProperties& properties) {
+void OvertureWindow::init(const WindowProperties& properties) {
     ASSERT_MSG(glfwInit(), "glfw failed to initialize");
 	
-	//TODO: make this part allow different apis
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	glfwSetErrorCallback(onErrorCallback);
 
     window = glfwCreateWindow(properties.width, properties.height, properties.title.c_str(), NULL, nullptr);
+	width = properties.width;
+	height = properties.height;
 
 	glfwSetFramebufferSizeCallback(window, onResize);
     ASSERT_MSG(window, "failed to create window");
 }
 
-void Window::shutdown() {
+void OvertureWindow::shutdown() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
 
-void Window::onUpdate() {
+void OvertureWindow::onUpdate() {
     glfwPollEvents();
 }
 
-void Window::run() {
+void OvertureWindow::run() {
     while (!glfwWindowShouldClose(window))
     {
         onUpdate();
@@ -60,10 +62,10 @@ void Window::run() {
     shutdown();
 }
 
-void Window::onErrorCallback(i32 code, const char *description) {
+void OvertureWindow::onErrorCallback(i32 code, const char *description) {
 	ERROR("GLFW [%d]: %s", code, description);
 }
 
-void Window::onResize(GLFWwindow* window, i32 width, i32 height) {
+void OvertureWindow::onResize(GLFWwindow* window, i32 width, i32 height) {
 	WindowEventBus::call(FRAMEBUFFER_RESIZE, window, width, height);
 }

@@ -3,7 +3,7 @@
 
 class Test : public Application {
     public:
-        Test(ApplicationCommandLineArgs args) {
+        Test(ApplicationInfo info, ApplicationCommandLineArgs args) : Application(info, args) {
             pushLayer(new TestLayer());
         }
 
@@ -11,5 +11,9 @@ class Test : public Application {
 };
 
 Application* createApplication(ApplicationCommandLineArgs args) {
-    return new Test(args);
+	ApplicationInfo info;
+	info.height = 900;
+	info.width = 1600;
+	
+    return new Test(info, args);
 }

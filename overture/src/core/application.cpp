@@ -2,13 +2,28 @@
 #include <core/log.h>
 #include <core/asserts.h>
 
+#include <rendering/renderer.h>
+
 Application* Application::instance = nullptr;
 
-Application::Application(const std::string& name, ApplicationCommandLineArgs args) : args(args) {
+Application::Application(ApplicationInfo info, ApplicationCommandLineArgs args) : args(args) {
     ASSERT_MSG(!instance, "Application already exists!");    
     instance = this;
-    window = new Window;
-    window->init(WindowProperties(name));
+    window = new OvertureWindow;
+
+	WindowProperties properties;
+	properties.height = info.height;
+	properties.width = info.width;
+	properties.title = info.name;
+
+    window->init(properties);
+
+	renderer::Init initInfo;
+	initInfo.renderer_api = bgfx::RendererType::Vulkan;
+	initInfo.window_height = window->height;
+	initInfo.window_width = window->width;
+
+	renderer::init(initInfo);
 }
 
 Application::~Application() {
@@ -30,6 +45,8 @@ void Application::run() {
         }
         window->onUpdate();
 
+		renderer::update();
+
         //temporay fix will be changed later to use the event system
         if (glfwWindowShouldClose(window->window)) {
             close();
@@ -37,6 +54,7 @@ void Application::run() {
     }
 
     window->shutdown();
+	renderer::shutdown();
 }
 
 void Application::pushLayer(Layer * layer) {
