@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/layer.h>
+#include <rendering/renderer.h>
 
 class TestLayer : public Layer {
     public:
@@ -10,4 +11,11 @@ class TestLayer : public Layer {
         void update() override;
 
         void start() override;
+
+	private:
+		bgfx::VertexBufferHandle vbh;
+		bgfx::IndexBufferHandle ibh;
+		bgfx::ShaderHandle vsh;
+		bgfx::ShaderHandle fsh;
+		bgfx::ProgramHandle program;
 };

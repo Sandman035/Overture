@@ -24,4 +24,6 @@ namespace renderer {
 	void shutdown();
 
 	void onResize(GLFWwindow* window, i32 width, i32 height);
+
+	bgfx::ShaderHandle loadShader(std::string directory, std::string filename);
 }
