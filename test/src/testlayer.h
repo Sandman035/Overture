@@ -5,6 +5,8 @@
 
 class TestLayer : public Layer {
     public:
+		bx::Vec3 position = {0.0f, 0.0f, 0.0f};
+
         TestLayer();
         virtual ~TestLayer() = default;
 

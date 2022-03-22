@@ -4,9 +4,11 @@
 
 #include <iostream>
 #include <cstring>
+#include <sstream>
 #include <string>
 #include <stdarg.h>
 
+#include <sys/time.h>
 #include <time.h>
 
 API void logOutput(log_level level, const char * message, ...) {
@@ -20,15 +22,19 @@ API void logOutput(log_level level, const char * message, ...) {
     vsnprintf(out_message, 32000, message, arg_ptr);
     va_end(arg_ptr);
 
-	char buff[23];
-    struct tm *sTm;
+	char buffer[30];
+	struct timeval tv;
 
-    time_t now = time(0);
-    sTm = localtime(&now);
+	time_t curtime;
 
-    strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S] ", sTm);
+	gettimeofday(&tv, NULL); 
+	curtime=tv.tv_sec;
 
-    std::string output = buff + level_strings[level] + out_message;
+	strftime(buffer, sizeof(buffer),"[%Y-%m-%d %H:%M:%S.",localtime(&curtime));
+	std::stringstream buffer2;
+	buffer2 << buffer << tv.tv_usec << "] ";
+
+    std::string output = buffer2.str() + level_strings[level] + out_message;
     ConsolePrint(output, level);
     
 }
