@@ -47,6 +47,7 @@ class Application {
         b8 running = true;
         b8 minimized = false;
 		b8 resized;
+		f32 deltaTime;
 
         OvertureWindow *window;
         ApplicationCommandLineArgs args;

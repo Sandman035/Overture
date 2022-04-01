@@ -44,7 +44,7 @@ TestLayer::TestLayer() {
     //nothing		
 }
 
-void TestLayer::update() {
+void TestLayer::update(f32 deltaTime) {
     if(Input::isKeyPressed(Escape)) {
         Application::get().close();
     }
@@ -75,13 +75,15 @@ void TestLayer::update() {
 	bx::mtxProj(proj, 60.0f, (float)Application::get().getWindow().width/(float)Application::get().getWindow().height, 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
 	bgfx::setViewTransform(0, view, proj);
 	float mtx[16];
-	bx::mtxRotateXYZ(mtx, 45, 45, 45);
+	bx::mtxRotateXYZ(mtx, rotation, rotation, rotation);
 	bgfx::setTransform(mtx);
 
 	bgfx::setVertexBuffer(0, vbh);
 	bgfx::setIndexBuffer(ibh);
 
 	bgfx::submit(0, program);
+
+	rotation += 1.0f * deltaTime;
 }
 
 void TestLayer::start() {

@@ -1,6 +1,7 @@
 #include <core/application.h>
 #include <core/log.h>
 #include <core/asserts.h>
+#include <ctime>
 
 #include <rendering/renderer.h>
 
@@ -36,11 +37,12 @@ void Application::close() {
 
 void Application::run() {
     while (running) {
-        //TODO: delta time later
+		//TODO: change to a more precise clock std::chrono::high_resolution_clock
+		const clock_t begin_time = clock();
 
         if (!minimized) {
             for (auto & i : layers) {
-                i->update();
+                i->update(deltaTime);
             }
         }
         window->onUpdate();
@@ -51,6 +53,7 @@ void Application::run() {
         if (glfwWindowShouldClose(window->window)) {
             close();
         }
+		deltaTime = float(clock() - begin_time ) / CLOCKS_PER_SEC;
     }
 
 	for (auto & i : layers) {

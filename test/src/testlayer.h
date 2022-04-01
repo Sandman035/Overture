@@ -6,11 +6,12 @@
 class TestLayer : public Layer {
     public:
 		bx::Vec3 position = {0.0f, 0.0f, 0.0f};
+		f32 rotation = 0;
 
         TestLayer();
         virtual ~TestLayer() = default;
 
-        void update() override;
+        void update(f32 deltaTime) override;
 
         void start() override;
 		void end() override;

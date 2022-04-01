@@ -10,7 +10,7 @@ class Layer {
         virtual ~Layer() = default;
 
         virtual void start() {}
-        virtual void update() {}
+        virtual void update(f32 deltaTime) {}
 		virtual void end() {}
 
         const std::string& getName() const { return name; }
