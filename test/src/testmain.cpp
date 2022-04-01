@@ -4,7 +4,8 @@
 class Test : public Application {
     public:
         Test(ApplicationInfo info, ApplicationCommandLineArgs args) : Application(info, args) {
-            pushLayer(new TestLayer());
+            pushLayer(new TestLayer("main layer"));
+			pushLayer(new Layer("name"));
         }
 
         ~Test() {};

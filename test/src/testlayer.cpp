@@ -40,29 +40,26 @@ static const uint16_t cubeTriList[] =
     6, 3, 7,
 };
 
-TestLayer::TestLayer() {
-    //nothing		
-}
-
 void TestLayer::update(f32 deltaTime) {
     if(Input::isKeyPressed(Escape)) {
         Application::get().close();
     }
 
 	if(Input::isKeyPressed(D)) {
-		position.x += 0.01f;
+		position.x += 10.0f * deltaTime;
 	}
 
 	if(Input::isKeyPressed(A)) {
-		position.x -= 0.01f;
+		position.x -= 10.0f * deltaTime;
+		Application::get().removeLayer("name");
 	}
 
 	if(Input::isKeyPressed(W)) {
-		position.z += 0.01f;
+		position.z += 10.0f * deltaTime;
 	}
 
 	if(Input::isKeyPressed(S)) {
-		position.z -= 0.01f;
+		position.z -= 10.0f * deltaTime;
 	}
 
 	const bx::Vec3 at = position;
@@ -70,7 +67,7 @@ void TestLayer::update(f32 deltaTime) {
 
 	float view[16];
 	bx::mtxLookAt(view, eye, at);
-	bx::mtxTranslate(view, -position.x, -position.y, -position.z+5.0f);
+	bx::mtxTranslate(view, -position.x, -position.y+sin(rotation), -position.z+5.0f);
 	float proj[16];
 	bx::mtxProj(proj, 60.0f, (float)Application::get().getWindow().width/(float)Application::get().getWindow().height, 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
 	bgfx::setViewTransform(0, view, proj);

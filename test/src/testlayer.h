@@ -8,7 +8,7 @@ class TestLayer : public Layer {
 		bx::Vec3 position = {0.0f, 0.0f, 0.0f};
 		f32 rotation = 0;
 
-        TestLayer();
+        TestLayer(const std::string& name) :name(name) {};
         virtual ~TestLayer() = default;
 
         void update(f32 deltaTime) override;
@@ -17,6 +17,8 @@ class TestLayer : public Layer {
 		void end() override;
 
 	private:
+		std::string name;
+
 		bgfx::VertexBufferHandle vbh;
 		bgfx::IndexBufferHandle ibh;
 		bgfx::ShaderHandle vsh;

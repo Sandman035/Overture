@@ -36,6 +36,7 @@ class Application {
         void run();
 
         void pushLayer(Layer * layer);
+		void removeLayer(const std::string & name);
 
         static Application& get() { return *instance; }
         OvertureWindow& getWindow() { return *window; }

@@ -67,3 +67,14 @@ void Application::pushLayer(Layer * layer) {
     layers.push_back(layer);
     layer->start();
 }
+
+void Application::removeLayer(const std::string & name) {
+	for (auto & i : layers) {
+		if(i->getName() == name) {
+			i->end();
+			layers.remove(i);
+			DEBUG("removed layer with name: '%s'", name.c_str());
+			return;
+		}
+	}
+}
