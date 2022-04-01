@@ -11,6 +11,7 @@ class Layer {
 
         virtual void start() {}
         virtual void update() {}
+		virtual void end() {}
 
         const std::string& getName() const { return name; }
     

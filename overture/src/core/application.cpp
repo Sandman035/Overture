@@ -53,6 +53,9 @@ void Application::run() {
         }
     }
 
+	for (auto & i : layers) {
+		i->end();
+	}
     window->shutdown();
 	renderer::shutdown();
 }

@@ -46,9 +46,6 @@ TestLayer::TestLayer() {
 
 void TestLayer::update() {
     if(Input::isKeyPressed(Escape)) {
-		bgfx::destroy(program);
-		bgfx::destroy(ibh);
-		bgfx::destroy(vbh);
         Application::get().close();
     }
 
@@ -103,4 +100,10 @@ void TestLayer::start() {
 	program = bgfx::createProgram(vsh, fsh, true);
 
     DEBUG("it works");
+}
+
+void TestLayer::end() {
+		bgfx::destroy(program);
+		bgfx::destroy(ibh);
+		bgfx::destroy(vbh);
 }

@@ -13,6 +13,7 @@ class TestLayer : public Layer {
         void update() override;
 
         void start() override;
+		void end() override;
 
 	private:
 		bgfx::VertexBufferHandle vbh;
