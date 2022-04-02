@@ -51,7 +51,7 @@ namespace renderer {
 		DEBUG("Window Resized %d, %d", width, height);
 	}
 
-	bgfx::ShaderHandle loadShader(std::string directory, std::string filename) {
+	bgfx::ShaderHandle loadShader(const std::string& directory, const std::string& filename) {
 		bgfx::ShaderHandle invalid = BGFX_INVALID_HANDLE;
 
 		std::string shaderPath = directory + filename;
@@ -74,4 +74,32 @@ namespace renderer {
 
 		return bgfx::createShader(mem);
 	};
+
+	Model loadModel(PosColorVertex vb[], size_t sizeVb, const uint16_t ib[], size_t sizeIb) {
+		Model model;
+
+		bgfx::VertexLayout pcvDecl;
+		pcvDecl.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			.end();
+		
+		model.vbh = bgfx::createVertexBuffer(bgfx::makeRef(vb, sizeVb), pcvDecl);
+		model.ibh = bgfx::createIndexBuffer(bgfx::makeRef(ib, sizeIb));
+
+		return model;
+	}
+
+	void renderModel(Model model) {
+		bgfx::setVertexBuffer(0, model.vbh);
+		bgfx::setIndexBuffer(model.ibh);
+
+		bgfx::submit(0, model.program);
+	}
+
+	void destroy(Model model) {
+		bgfx::destroy(model.program);
+		bgfx::destroy(model.ibh);
+		bgfx::destroy(model.vbh);
+	}
 }

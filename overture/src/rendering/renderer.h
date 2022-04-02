@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <defines.h>
+#include <rendering/renderer_types.h>
 
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
@@ -25,5 +26,11 @@ namespace renderer {
 
 	void onResize(GLFWwindow* window, i32 width, i32 height);
 
-	bgfx::ShaderHandle loadShader(std::string directory, std::string filename);
+	bgfx::ShaderHandle loadShader(const std::string& directory, const std::string& filename);
+
+	Model loadModel(PosColorVertex vb[], size_t sizeVb, const uint16_t ib[], size_t sizeIb);
+
+	void renderModel(Model model);
+
+	void destroy(Model model);
 }

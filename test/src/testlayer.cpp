@@ -4,15 +4,7 @@
 #include <core/application.h>
 #include <rendering/renderer.h>
 
-struct PosColorVertex
-{
-    float x;
-    float y;
-    float z;
-    uint32_t abgr;
-};
-
-static PosColorVertex cubeVertices[] =
+static renderer::PosColorVertex cubeVertices[] =
 {
     {-1.0f,  1.0f,  1.0f, 0xff000000 },
     { 1.0f,  1.0f,  1.0f, 0xff0000ff },
@@ -75,34 +67,22 @@ void TestLayer::update(f32 deltaTime) {
 	bx::mtxRotateXYZ(mtx, rotation, rotation, rotation);
 	bgfx::setTransform(mtx);
 
-	bgfx::setVertexBuffer(0, vbh);
-	bgfx::setIndexBuffer(ibh);
-
-	bgfx::submit(0, program);
+	renderer::renderModel(model);
 
 	rotation += 1.0f * deltaTime;
 }
 
 void TestLayer::start() {
-	bgfx::VertexLayout pcvDecl;
-	pcvDecl.begin()
-		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-		.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
-		.end();
-	
-	vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices)), pcvDecl);
-	ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
+	model = renderer::loadModel(cubeVertices, sizeof(cubeVertices), cubeTriList, sizeof(cubeTriList));
 
 	vsh = renderer::loadShader("../overture/res/shaders/", "vs_cubes.bin");
 	fsh = renderer::loadShader("../overture/res/shaders/", "fs_cubes.bin");
 
-	program = bgfx::createProgram(vsh, fsh, true);
+	model.program = bgfx::createProgram(vsh, fsh, true);
 
     DEBUG("it works");
 }
 
 void TestLayer::end() {
-		bgfx::destroy(program);
-		bgfx::destroy(ibh);
-		bgfx::destroy(vbh);
+		renderer::destroy(model);
 }
