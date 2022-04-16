@@ -12,10 +12,18 @@
 
 #include <core/application.h>
 #include <platform/window.h>
+#include <bimg/bimg.h>
+#include <bx/bx.h>
 
 #include <core/log.h>
 
 #include <fstream>
+#include <vector>
+
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tiny_obj_loader.h>
+
+#include <assimp/Importer.hpp>
 
 namespace renderer {
 	void init(Init& init) {
@@ -86,6 +94,45 @@ namespace renderer {
 		
 		model.vbh = bgfx::createVertexBuffer(bgfx::makeRef(vb, sizeVb), pcvDecl);
 		model.ibh = bgfx::createIndexBuffer(bgfx::makeRef(ib, sizeIb));
+
+		return model;
+	}
+
+	Model loadModel(const std::string& filepath) {
+		Model model;
+
+		bgfx::VertexLayout pcvDecl;
+		pcvDecl.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+			.end();
+
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+		std::string warn, err;
+
+		tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filepath.c_str());
+
+		std::vector<PosColorVertex> verticies;
+		std::vector<uint16_t> indices;
+
+		for (const auto& shape : shapes) {
+			for (const auto& index : shape.mesh.indices) {
+				PosColorVertex vertex;
+
+				vertex.x = attrib.vertices[3 * index.vertex_index + 0];
+				vertex.y = attrib.vertices[3 * index.vertex_index + 1]; 
+				vertex.z = attrib.vertices[3 * index.vertex_index + 2];
+				vertex.abgr = 0xffffffff;
+
+				verticies.push_back(vertex);
+				indices.push_back(indices.size());
+			}
+		}
+
+		model.vbh = bgfx::createVertexBuffer(bgfx::makeRef(verticies.data(), verticies.size()), pcvDecl);
+		model.ibh = bgfx::createIndexBuffer(bgfx::makeRef(indices.data(), indices.size()));
 
 		return model;
 	}

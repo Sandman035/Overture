@@ -20,6 +20,9 @@ class TestLayer : public Layer {
 		std::string name;
 
 		renderer::Model model;
+		bgfx::VertexBufferHandle VBH;
+		bgfx::IndexBufferHandle IBH;
+		bgfx::ProgramHandle program;
 
 		bgfx::ShaderHandle vsh;
 		bgfx::ShaderHandle fsh;

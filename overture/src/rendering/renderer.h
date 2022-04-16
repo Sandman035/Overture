@@ -29,6 +29,7 @@ namespace renderer {
 	bgfx::ShaderHandle loadShader(const std::string& directory, const std::string& filename);
 
 	Model loadModel(PosColorVertex vb[], size_t sizeVb, const uint16_t ib[], size_t sizeIb);
+	Model loadModel(const std::string& filepath);
 
 	void renderModel(Model model);
 

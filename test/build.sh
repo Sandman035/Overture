@@ -12,7 +12,7 @@ cFilenames=$(find . -type f -name "*.cpp")
 assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
 includeFlags="-Isrc -I../overture/src/ -I../overture/deps/include/"
-linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++ -lbgfx -lm"
+linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++ -lm -lbgfx"
 defines="-D_DEBUG -DIMPORT -DBX_CONFIG_DEBUG"
 #defines="-DIMPORT"
 
