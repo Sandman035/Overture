@@ -1,10 +1,14 @@
 #pragma once
 
 #include <defines.h>
-#include <rendering/vulkan/vulkan_types.h>
+
+#include "vulkan_types.h"
+#include "vulkan_helpers.h"
+
+#include <vulkan/vulkan.h>
 
 namespace vk {
-	void init();
+	void init(const initInfo& info, VulkanContext* context);
 	void shutdown();
 
 	void frame();
