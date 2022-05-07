@@ -12,5 +12,10 @@ namespace vk {
 		std::string name;
 	};
 
+	const std::vector<const char*> validationLayers = {
+		"VL_LAYER_KHRONOS_validation"
+	};
+
 	std::vector<const char*> getRequiredExtentions();
+	b8 checkValidationLayerSupport();
 }

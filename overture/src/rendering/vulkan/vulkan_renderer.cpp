@@ -5,6 +5,8 @@
 
 namespace vk {
 	void init(const initInfo& info, VulkanContext* context) {
+		b8 validationLayerSupported = checkValidationLayerSupport();
+
 		VkApplicationInfo appinfo{};
 		appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appinfo.pApplicationName = info.name.c_str();
@@ -21,8 +23,16 @@ namespace vk {
 		instanceInfo.enabledExtensionCount = static_cast<uint32_t>(extentions.size());
 		instanceInfo.ppEnabledExtensionNames = extentions.data();
 
-		//TODO: add validation layers on non-release builds
+#if RELEASE == 1
+		if (validationLayerSupported) {
+			instanceInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+			instanceInfo.ppEnabledLayerNames = validationLayers.data();
+		} else {
+			instanceInfo.enabledLayerCount = 0;
+		}
+#else
 		instanceInfo.enabledLayerCount = 0;
+#endif
 
 		vkCreateInstance(&instanceInfo, nullptr, &context->instance);
 	}
