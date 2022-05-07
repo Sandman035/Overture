@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <string>
+#include <vulkan/vulkan.h>
 
 namespace vk {
 	struct initInfo {
@@ -18,4 +19,6 @@ namespace vk {
 
 	std::vector<const char*> getRequiredExtentions();
 	b8 checkValidationLayerSupport();
+
+	VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 }

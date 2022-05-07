@@ -7,6 +7,7 @@
 namespace vk {
 	struct VulkanContext {
 		VkInstance instance;
+		VkDebugUtilsMessengerEXT debugMessenger;
 	};
 
 	struct VertexLayout {};
