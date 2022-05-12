@@ -6,6 +6,8 @@
 #include <string>
 #include <vulkan/vulkan.h>
 
+#include "vulkan_types.h"
+
 namespace vk {
 	struct initInfo {
 		i32 width;

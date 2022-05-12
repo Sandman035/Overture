@@ -2,6 +2,9 @@
 
 #include <core/log.h>
 #include <core/asserts.h>
+#include <core/application.h>
+
+#include <GLFW/glfw3.h>
 
 namespace vk {
 	void init(const initInfo& info, VulkanContext* context) {
@@ -48,5 +51,6 @@ namespace vk {
 			func(context->instance, &debugCreateInfo, nullptr, &context->debugMessenger);
 		}
 #endif
+		glfwCreateWindowSurface(context->instance, Application::get().getWindow().window, nullptr, &context->surface);
 	}
 }

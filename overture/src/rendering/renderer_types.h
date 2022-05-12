@@ -2,8 +2,7 @@
 
 #include <defines.h>
 
-#include <bgfx/bgfx.h>
-#include <unordered_map>
+#include <cstdint>
 
 namespace renderer {
 	struct PosColorVertex {
@@ -11,16 +10,5 @@ namespace renderer {
 		f32 y;
 		f32 z;
 		uint32_t abgr;
-
-		bool operator==(const PosColorVertex& other) const {
-			return x == other.x && y == other.y && z == other.z && abgr == other.abgr;
-		}
-	};
-
-	struct Model {
-		bgfx::VertexBufferHandle vbh;
-		bgfx::IndexBufferHandle ibh;
-
-		bgfx::ProgramHandle program;
 	};
 }

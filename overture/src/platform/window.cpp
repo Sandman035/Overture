@@ -32,7 +32,6 @@ void OvertureWindow::init(const WindowProperties& properties) {
     ASSERT_MSG(glfwInit(), "glfw failed to initialize");
 	
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	glfwSetErrorCallback(onErrorCallback);
 

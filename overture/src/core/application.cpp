@@ -20,9 +20,10 @@ Application::Application(ApplicationInfo info, ApplicationCommandLineArgs args) 
     window->init(properties);
 
 	renderer::Init initInfo;
-	initInfo.renderer_api = bgfx::RendererType::Vulkan;
 	initInfo.window_height = window->height;
 	initInfo.window_width = window->width;
+	initInfo.name = info.name;
+	initInfo.context = context;
 
 	renderer::init(initInfo);
 }

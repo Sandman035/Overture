@@ -2,6 +2,7 @@
 
 #include <defines.h>
 #include <platform/window.h>
+#include <rendering/vulkan/vulkan_types.h>
 #include <core/layer.h>
 
 #include <GLFW/glfw3.h>
@@ -51,6 +52,7 @@ class Application {
 		f32 deltaTime;
 
         OvertureWindow *window;
+		vk::VulkanContext context;
         ApplicationCommandLineArgs args;
         static Application* instance;
         std::list<Layer*> layers;

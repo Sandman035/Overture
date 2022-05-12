@@ -11,7 +11,7 @@
 #include <sys/time.h>
 #include <time.h>
 
-API void logOutput(log_level level, const char * message, ...) {
+void logOutput(log_level level, const char * message, ...) {
     std::string level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "};
 
     char out_message[32000];

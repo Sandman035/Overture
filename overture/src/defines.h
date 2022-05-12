@@ -54,16 +54,6 @@ typedef bool b8;
 #error "Unknown platform!"
 #endif
 
-#ifdef PLATFORM_WINDOWS
-#ifdef EXPORT
-#define API __declspec(dllexport)
-#else
-#define API __declspec(dllimport)
-#endif
-#else
-#define API
-#endif
-
 #ifdef _DEBUG
 #define RELEASE 0
 #else
