@@ -4,6 +4,8 @@
 #include <core/asserts.h>
 #include <core/application.h>
 
+#include "vulkan_device.h"
+
 #include <GLFW/glfw3.h>
 
 namespace vk {
@@ -52,5 +54,7 @@ namespace vk {
 		}
 #endif
 		glfwCreateWindowSurface(context->instance, Application::get().getWindow().window, nullptr, &context->surface);
+
+		createDevice(context);
 	}
 }
