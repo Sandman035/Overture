@@ -14,7 +14,7 @@ namespace vk {
 
 		std::vector<const char*> extentions(glfwExtentions, glfwExtentions + glfwExtentionCount);
 
-#if RELEASE == 1
+#if RELEASE == 0
 		if (checkValidationLayerSupport()) {
 			extentions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 		}

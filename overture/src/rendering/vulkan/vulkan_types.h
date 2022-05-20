@@ -13,6 +13,9 @@ namespace vk {
 		VkQueue presentQueue;
 
 		VkCommandPool commandPool;
+
+		uint32_t graphicsFamily;
+		uint32_t presentFamily;
 	};
 
 	struct VulkanContext {

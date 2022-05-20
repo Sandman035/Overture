@@ -16,7 +16,7 @@ namespace vk {
 	};
 
 	const std::vector<const char*> validationLayers = {
-		"VL_LAYER_KHRONOS_validation"
+		"VK_LAYER_KHRONOS_validation"
 	};
 
 	const std::vector<const char*> deviceExtensions = {

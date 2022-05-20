@@ -12,6 +12,8 @@ namespace vk {
 	void init(const initInfo& info, VulkanContext* context) {
 		b8 validationLayerSupported = checkValidationLayerSupport();
 
+		DEBUG("%d", checkValidationLayerSupport());
+
 		VkApplicationInfo appinfo{};
 		appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appinfo.pApplicationName = info.name.c_str();
@@ -28,7 +30,7 @@ namespace vk {
 		instanceInfo.enabledExtensionCount = static_cast<uint32_t>(extentions.size());
 		instanceInfo.ppEnabledExtensionNames = extentions.data();
 
-#if RELEASE == 1
+#if RELEASE == 0
 		if (validationLayerSupported) {
 			instanceInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
 			instanceInfo.ppEnabledLayerNames = validationLayers.data();
@@ -41,13 +43,15 @@ namespace vk {
 
 		vkCreateInstance(&instanceInfo, nullptr, &context->instance);
 
-#if RELEASE == 1
+#if RELEASE == 0
 		if (validationLayerSupported) {
 			VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;	
 			debugCreateInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 			debugCreateInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 			debugCreateInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 			debugCreateInfo.pfnUserCallback = debugCallback;
+			debugCreateInfo.pNext = NULL;
+			debugCreateInfo.flags = 0;
 
 			auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(context->instance, "vkCreateDebugUtilsMessengerEXT");
 			func(context->instance, &debugCreateInfo, nullptr, &context->debugMessenger);
