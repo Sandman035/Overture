@@ -12,8 +12,6 @@ namespace vk {
 	void init(const initInfo& info, VulkanContext* context) {
 		b8 validationLayerSupported = checkValidationLayerSupport();
 
-		DEBUG("%d", checkValidationLayerSupport());
-
 		VkApplicationInfo appinfo{};
 		appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appinfo.pApplicationName = info.name.c_str();

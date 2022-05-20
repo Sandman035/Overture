@@ -51,6 +51,12 @@ namespace vk {
 
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.graphicsFamily, 0, &context->device.graphicsQueue);
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.presentFamily, 0, &context->device.presentQueue);
+
+		VkCommandPoolCreateInfo poolInfo{};
+		poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+		poolInfo.queueFamilyIndex = context->device.graphicsFamily;
+		poolInfo.flags = 0;
+		vkCreateCommandPool(context->device.logicalDevice, &poolInfo, nullptr, &context->device.commandPool);
 	}
 
 	void selecPhysicalDevice(VulkanContext* context) {
