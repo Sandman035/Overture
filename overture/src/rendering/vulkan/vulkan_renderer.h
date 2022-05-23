@@ -9,7 +9,7 @@
 
 namespace vk {
 	void init(const initInfo& info, VulkanContext* context);
-	void shutdown();
+	void shutdown(VulkanContext* context);
 
 	void frame();
 

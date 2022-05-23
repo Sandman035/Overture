@@ -59,6 +59,18 @@ namespace vk {
 		vkCreateCommandPool(context->device.logicalDevice, &poolInfo, nullptr, &context->device.commandPool);
 	}
 
+	void destroyDevice(VulkanContext* context) {
+		context->device.graphicsQueue = 0;
+		context->device.presentQueue = 0;
+
+		vkDestroyCommandPool(context->device.logicalDevice, context->device.commandPool, nullptr);
+
+		vkDestroyDevice(context->device.logicalDevice, nullptr);
+		context->device.logicalDevice = 0;
+
+		context->device.physicalDevice = 0;
+	}
+
 	void selecPhysicalDevice(VulkanContext* context) {
 		uint32_t deviceCount = 0;
 		vkEnumeratePhysicalDevices(context->instance, &deviceCount, nullptr);

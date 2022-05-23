@@ -59,4 +59,17 @@ namespace vk {
 
 		createDevice(context);
 	}
+
+	void shutdown(VulkanContext* context) {
+		destroyDevice(context);
+		if (context->debugMessenger != VK_NULL_HANDLE) {
+			auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(context->instance, "vkDestroyDebugUtilsMessengerEXT");
+			if (func != nullptr) {
+				func(context->instance, context->debugMessenger, nullptr);
+			}
+		}
+
+		vkDestroySurfaceKHR(context->instance, context->surface, nullptr);
+		vkDestroyInstance(context->instance, nullptr);
+	}
 }
