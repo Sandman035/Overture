@@ -11,6 +11,7 @@ namespace vk {
 	void createDevice(VulkanContext* context) {
 		selecPhysicalDevice(context);
 
+		INFO("Creating logical device");
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
 		std::set<uint32_t> uniqueQueueFamilies = {context->device.graphicsFamily, context->device.presentFamily};
 
@@ -52,8 +53,12 @@ namespace vk {
 			ERROR("failed to create vulkan device");
 		}
 
+		INFO("Logical device created");
+
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.graphicsFamily, 0, &context->device.graphicsQueue);
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.presentFamily, 0, &context->device.presentQueue);
+		
+		INFO("Queues obtained");
 
 		VkCommandPoolCreateInfo poolInfo{};
 		poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
@@ -62,6 +67,8 @@ namespace vk {
 		if (vkCreateCommandPool(context->device.logicalDevice, &poolInfo, nullptr, &context->device.commandPool) != VK_SUCCESS) {
 			ERROR("failed to create command pool");
 		}
+
+		INFO("Graphics command pool created");
 	}
 
 	void destroyDevice(VulkanContext* context) {
@@ -69,7 +76,8 @@ namespace vk {
 		context->device.presentQueue = 0;
 
 		INFO("Destroying command pool");
-		vkDestroyCommandPool(context->device.logicalDevice, context->device.commandPool, nullptr);
+		//TODO: fix core being dumped
+		//vkDestroyCommandPool(context->device.logicalDevice, context->device.commandPool, nullptr);
 		
 		INFO("Destroying logical device");
 		vkDestroyDevice(context->device.logicalDevice, nullptr);

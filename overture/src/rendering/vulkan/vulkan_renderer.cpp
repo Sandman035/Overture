@@ -42,8 +42,10 @@ namespace vk {
 		if (vkCreateInstance(&instanceInfo, nullptr, &context->instance) != VK_SUCCESS) {
 			ERROR("failed to create instance");
 		}
+		INFO("vulkan instance created");
 
 #if RELEASE == 0
+		INFO("creating vulkan debuger");
 		if (validationLayerSupported) {
 			VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;	
 			debugCreateInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -57,9 +59,11 @@ namespace vk {
 			func(context->instance, &debugCreateInfo, nullptr, &context->debugMessenger);
 		}
 #endif
+		INFO("creating vulkan surface");
 		if (glfwCreateWindowSurface(context->instance, Application::get().getWindow().window, nullptr, &context->surface) != VK_SUCCESS) {
 			ERROR("failed to create surface");
 		}
+		INFO("vulkan surface created");
 
 		createDevice(context);
 	}
@@ -79,7 +83,8 @@ namespace vk {
 		}
 
 		INFO("Destroying vulkan surface");
-		vkDestroySurfaceKHR(context->instance, context->surface, nullptr);
+		//TODO: fix core being dumped
+		//vkDestroySurfaceKHR(context->instance, context->surface, nullptr);
 
 		INFO("Destroying vulkan instance");
 		vkDestroyInstance(context->instance, nullptr);
