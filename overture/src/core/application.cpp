@@ -60,8 +60,8 @@ void Application::run() {
 	for (auto & i : layers) {
 		i->end();
 	}
+	renderer::shutdown(&context);
     window->shutdown();
-	renderer::shutdown();
 }
 
 void Application::pushLayer(Layer * layer) {

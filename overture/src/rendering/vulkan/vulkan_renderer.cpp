@@ -39,7 +39,9 @@ namespace vk {
 		instanceInfo.enabledLayerCount = 0;
 #endif
 
-		vkCreateInstance(&instanceInfo, nullptr, &context->instance);
+		if (vkCreateInstance(&instanceInfo, nullptr, &context->instance) != VK_SUCCESS) {
+			ERROR("failed to create instance");
+		}
 
 #if RELEASE == 0
 		if (validationLayerSupported) {
@@ -55,13 +57,20 @@ namespace vk {
 			func(context->instance, &debugCreateInfo, nullptr, &context->debugMessenger);
 		}
 #endif
-		glfwCreateWindowSurface(context->instance, Application::get().getWindow().window, nullptr, &context->surface);
+		if (glfwCreateWindowSurface(context->instance, Application::get().getWindow().window, nullptr, &context->surface) != VK_SUCCESS) {
+			ERROR("failed to create surface");
+		}
 
 		createDevice(context);
 	}
 
 	void shutdown(VulkanContext* context) {
+		INFO("Starting renderer shutdown");
+
+		INFO("Destroying device");
 		destroyDevice(context);
+
+		INFO("Destroying debugMessenger");
 		if (context->debugMessenger != VK_NULL_HANDLE) {
 			auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(context->instance, "vkDestroyDebugUtilsMessengerEXT");
 			if (func != nullptr) {
@@ -69,7 +78,10 @@ namespace vk {
 			}
 		}
 
+		INFO("Destroying vulkan surface");
 		vkDestroySurfaceKHR(context->instance, context->surface, nullptr);
+
+		INFO("Destroying vulkan instance");
 		vkDestroyInstance(context->instance, nullptr);
 	}
 }

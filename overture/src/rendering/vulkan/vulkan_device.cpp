@@ -1,6 +1,7 @@
 #include "vulkan_device.h"
 
 #include "vulkan_helpers.h"
+#include <core/log.h>
 
 #include <vector>
 #include <optional>
@@ -47,7 +48,9 @@ namespace vk {
 #else
 		createInfo.enabledLayerCount = 0;
 #endif
-		vkCreateDevice(context->device.physicalDevice, &createInfo, nullptr, &context->device.logicalDevice);
+		if (vkCreateDevice(context->device.physicalDevice, &createInfo, nullptr, &context->device.logicalDevice) != VK_SUCCESS) {
+			ERROR("failed to create vulkan device");
+		}
 
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.graphicsFamily, 0, &context->device.graphicsQueue);
 		vkGetDeviceQueue(context->device.logicalDevice, context->device.presentFamily, 0, &context->device.presentQueue);
@@ -56,18 +59,23 @@ namespace vk {
 		poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 		poolInfo.queueFamilyIndex = context->device.graphicsFamily;
 		poolInfo.flags = 0;
-		vkCreateCommandPool(context->device.logicalDevice, &poolInfo, nullptr, &context->device.commandPool);
+		if (vkCreateCommandPool(context->device.logicalDevice, &poolInfo, nullptr, &context->device.commandPool) != VK_SUCCESS) {
+			ERROR("failed to create command pool");
+		}
 	}
 
 	void destroyDevice(VulkanContext* context) {
 		context->device.graphicsQueue = 0;
 		context->device.presentQueue = 0;
 
+		INFO("Destroying command pool");
 		vkDestroyCommandPool(context->device.logicalDevice, context->device.commandPool, nullptr);
-
+		
+		INFO("Destroying logical device");
 		vkDestroyDevice(context->device.logicalDevice, nullptr);
 		context->device.logicalDevice = 0;
 
+		INFO("Releasing physical device resources");
 		context->device.physicalDevice = 0;
 	}
 

@@ -19,7 +19,7 @@ namespace renderer {
 
 	void init(Init& info);
 	void update();
-	void shutdown();
+	void shutdown(vk::VulkanContext* context);
 
 	void onResize(GLFWwindow* window, i32 width, i32 height);
 }
