@@ -23,7 +23,7 @@ typedef enum log_level {
     LOG_LEVEL_TRACE = 5
 } log_level;
 
-API void logOutput(log_level level, const char * message, ...);
+void logOutput(log_level level, const char * message, ...);
 
 // Logs a fatal-level message.
 #define FATAL(message, ...) logOutput(LOG_LEVEL_FATAL, message, ##__VA_ARGS__);

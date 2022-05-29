@@ -5,7 +5,6 @@
 
 class TestLayer : public Layer {
     public:
-		bx::Vec3 position = {0.0f, 0.0f, 0.0f};
 		f32 rotation = 0;
 
         TestLayer(const std::string& name) :name(name) {};
@@ -18,9 +17,4 @@ class TestLayer : public Layer {
 
 	private:
 		std::string name;
-
-		renderer::Model model;
-
-		bgfx::ShaderHandle vsh;
-		bgfx::ShaderHandle fsh;
 };
