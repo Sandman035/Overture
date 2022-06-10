@@ -5,6 +5,7 @@
 #include <core/application.h>
 
 #include "vulkan_device.h"
+#include "vulkan_swapchain.h"
 
 #include <GLFW/glfw3.h>
 
@@ -66,6 +67,8 @@ namespace vk {
 		INFO("vulkan surface created");
 
 		createDevice(context);
+
+		createSwapchain(context, info.width, info.height, &context->swapchain);
 	}
 
 	void shutdown(VulkanContext* context) {

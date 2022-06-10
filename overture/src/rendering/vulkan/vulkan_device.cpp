@@ -165,6 +165,12 @@ namespace vk {
 		VkPhysicalDeviceFeatures supportedFeatures;
 		vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
 
+		context->device.swapchainSupport.formatCount = formats.size();
+		context->device.swapchainSupport.formats = formats;
+
+		context->device.swapchainSupport.presentModeCount = presentModeCount;
+		context->device.swapchainSupport.presentModes = presentModes;
+
 		return graphicsFamily.has_value() && presentFamily.has_value() && requiredExtensions.empty() && !formats.empty() && !presentModes.empty() && supportedFeatures.samplerAnisotropy;
 	}
 };
