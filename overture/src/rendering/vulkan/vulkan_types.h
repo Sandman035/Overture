@@ -13,6 +13,8 @@ namespace vk {
 		VkSwapchainKHR handle;
 
 		u32 imageCount;
+		std::vector<VkImage> swapchainImages;
+		std::vector<VkImageView> swapchainImageViews;
 
 		std::vector<VkFramebuffer> framebuffers;
 	};

@@ -91,6 +91,26 @@ namespace vk {
 		swapchainCreateInfo.oldSwapchain = 0;
 
 		vkCreateSwapchainKHR(context->device.logicalDevice, &swapchainCreateInfo, nullptr, &swapchain->handle);
+	
+		vkGetSwapchainImagesKHR(context->device.logicalDevice, context->swapchain.handle, &context->swapchain.imageCount, nullptr);
+		swapchain->swapchainImages.resize(imageCount);
+		vkGetSwapchainImagesKHR(context->device.logicalDevice, swapchain->handle, &swapchain->imageCount, swapchain->swapchainImages.data());
+
+		swapchain->swapchainImageViews.resize(imageCount);
+
+		for (size_t i = 0; i < swapchain->swapchainImages.size(); i++) {
+			VkImageViewCreateInfo viewInfo = {VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
+			viewInfo.image = swapchain->swapchainImages[i];
+			viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+			viewInfo.format = swapchain->imageFormat.format;
+			viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+			viewInfo.subresourceRange.baseMipLevel = 0;
+			viewInfo.subresourceRange.levelCount = 1;
+			viewInfo.subresourceRange.baseArrayLayer = 0;
+			viewInfo.subresourceRange.layerCount = 1;
+
+			vkCreateImageView(context->device.logicalDevice, &viewInfo, nullptr, &swapchain->swapchainImageViews[i]);
+		}
 	}
 
 	void destroy(VulkanContext* context, VulkanSwapchain* swapchain) {
