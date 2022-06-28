@@ -42,6 +42,8 @@ namespace vk {
 
 		uint32_t graphicsFamily;
 		uint32_t presentFamily;
+
+		VkFormat depthFormat;
 	};
 
 	struct VulkanContext {

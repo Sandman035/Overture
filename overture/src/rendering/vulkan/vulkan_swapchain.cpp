@@ -111,6 +111,16 @@ namespace vk {
 
 			vkCreateImageView(context->device.logicalDevice, &viewInfo, nullptr, &swapchain->swapchainImageViews[i]);
 		}
+
+		std::vector<VkFormat> formats = {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT};
+		for (VkFormat format : formats) {
+			VkFormatProperties formatProperties;
+			vkGetPhysicalDeviceFormatProperties(context->device.physicalDevice, format, &formatProperties);
+			
+			if ((formatProperties.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) == VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+				context->device.depthFormat = format;
+			}
+		}
 	}
 
 	void destroy(VulkanContext* context, VulkanSwapchain* swapchain) {
