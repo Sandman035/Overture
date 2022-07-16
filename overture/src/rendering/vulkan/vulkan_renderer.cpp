@@ -74,6 +74,10 @@ namespace vk {
 	void shutdown(VulkanContext* context) {
 		INFO("Starting renderer shutdown");
 
+		INFO("Destroying swapchain");
+		//TODO: fix core being dumped
+		//destroySwapchain(context, &context->swapchain);
+
 		INFO("Destroying device");
 		destroyDevice(context);
 

@@ -122,8 +122,17 @@ namespace vk {
 				context->device.depthFormat = format;
 			}
 		}
+
+		createVulkanImage(context, swapchainExtent.width, swapchainExtent.height, context->device.depthFormat, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, VK_IMAGE_ASPECT_DEPTH_BIT, &context->swapchain.depthImage);
 	}
 
 	void destroy(VulkanContext* context, VulkanSwapchain* swapchain) {
+		destroy(context, &swapchain->depthImage);
+
+		for (auto imageView : swapchain->swapchainImageViews) {
+			vkDestroyImageView(context->device.logicalDevice, imageView, nullptr);
+		}
+
+		vkDestroySwapchainKHR(context->device.logicalDevice, swapchain->handle, nullptr);
 	}
 }

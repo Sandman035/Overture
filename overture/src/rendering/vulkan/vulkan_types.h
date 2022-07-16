@@ -27,6 +27,8 @@ namespace vk {
 		std::vector<VkImageView> swapchainImageViews;
 
 		std::vector<VkFramebuffer> framebuffers;
+
+		VulkanImage depthImage;
 	};
 
 	struct VulkanSwapchainSupportInfo {
