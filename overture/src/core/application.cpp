@@ -23,7 +23,6 @@ Application::Application(ApplicationInfo info, ApplicationCommandLineArgs args) 
 	initInfo.window_height = window->height;
 	initInfo.window_width = window->width;
 	initInfo.name = info.name;
-	initInfo.context = context;
 
 	renderer::init(initInfo);
 }
@@ -60,7 +59,7 @@ void Application::run() {
 	for (auto & i : layers) {
 		i->end();
 	}
-	renderer::shutdown(&context);
+	renderer::shutdown();
     window->shutdown();
 }
 
