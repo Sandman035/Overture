@@ -6,6 +6,16 @@
 #include <vector>
 
 namespace vk {
+	struct VulkanImage {
+		VkImage handle;
+		VkImageView view;
+
+		VkDeviceMemory memory;
+
+		u32 width;
+		u32 height;
+	};
+
 	struct VulkanSwapchain {
 		VkSurfaceFormatKHR imageFormat;
 		u8 maxFrames;

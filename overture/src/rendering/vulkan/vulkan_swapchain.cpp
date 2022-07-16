@@ -1,5 +1,6 @@
 #include "vulkan_swapchain.h"
 
+#include "vulkan_image.h"
 #include <algorithm>
 
 namespace vk {
