@@ -22,7 +22,6 @@ Application::Application(ApplicationInfo info, ApplicationCommandLineArgs args) 
 	renderer::Init initInfo;
 	initInfo.window_height = window->height;
 	initInfo.window_width = window->width;
-	initInfo.name = info.name;
 
 	renderer::init(initInfo);
 }

@@ -12,7 +12,6 @@ namespace renderer {
 	struct Init {
 		uint32_t window_width;
 		uint32_t window_height;
-		std::string name;
 	};
 
 	void init(Init& info);

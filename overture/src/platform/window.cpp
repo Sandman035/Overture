@@ -31,13 +31,20 @@ void WindowEventBus::call(WindowEvents event, GLFWwindow* window, i32 width, i32
 void OvertureWindow::init(const WindowProperties& properties) {
     ASSERT_MSG(glfwInit(), "glfw failed to initialize");
 	
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#if RELEASE == 0
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
 
 	glfwSetErrorCallback(onErrorCallback);
 
     window = glfwCreateWindow(properties.width, properties.height, properties.title.c_str(), NULL, nullptr);
 	width = properties.width;
 	height = properties.height;
+	glfwMakeContextCurrent(window);
 
 	glfwSetFramebufferSizeCallback(window, onResize);
     ASSERT_MSG(window, "failed to create window");
@@ -49,16 +56,8 @@ void OvertureWindow::shutdown() {
 }
 
 void OvertureWindow::onUpdate() {
+	glfwSwapBuffers(window);
     glfwPollEvents();
-}
-
-void OvertureWindow::run() {
-    while (!glfwWindowShouldClose(window))
-    {
-        onUpdate();
-    }
-
-    shutdown();
 }
 
 void OvertureWindow::onErrorCallback(i32 code, const char *description) {

@@ -1,5 +1,5 @@
 -Ioverture/src
 -Ioverture/deps/include
--Ioverture/deps/glad
+-Ioverture/deps/glad/include
 -xc++
 -std=c++17

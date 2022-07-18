@@ -39,7 +39,6 @@ class OvertureWindow {
         void init(const WindowProperties& properties = WindowProperties());
         void shutdown();
 
-        void run();
         void onUpdate();
 
 		static void onResize(GLFWwindow* window, i32 width, i32 height);
