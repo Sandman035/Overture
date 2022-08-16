@@ -19,11 +19,10 @@ namespace gl {
 		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
 #if RELEASE == 0
-		//TODO: ENABLE when using opengl 4.3 or higher
-		//glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		//glDebugMessageCallback(DebugCallback, nullptr);
-		//
-		//glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(DebugCallback, nullptr);
+		
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 #endif
 
 		glEnable(GL_BLEND);
@@ -47,8 +46,10 @@ namespace gl {
 
 	void drawIndexed(VertexArray& vertexArray, uint32_t indexCount) {
 		vertexArray.bind();
+
 		uint32_t count = indexCount ? indexCount : vertexArray.getIndexBuffer().getCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+
 	}
 
 	void drawLines(VertexArray& vertexArray, uint32_t vertexCount) {

@@ -32,7 +32,7 @@ void OvertureWindow::init(const WindowProperties& properties) {
     ASSERT_MSG(glfwInit(), "glfw failed to initialize");
 	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #if RELEASE == 0

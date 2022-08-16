@@ -11,7 +11,7 @@ cFilenames=$(find . -type f -name "*.cpp")
 
 assembly="testbed"
 compilerFlags="-g -fdeclspec -fPIC -std=c++17" 
-includeFlags="-Isrc -I../overture/src/ -I../overture/deps/include/ -I../overture/deps/glad"
+includeFlags="-Isrc -I../overture/src/ -I../overture/deps/include/ -I../overture/deps/glad/include"
 linkerFlags="-L../bin/ -loverture -Wl,-rpath,. -lstdc++ -lm"
 defines="-D_DEBUG"
 
