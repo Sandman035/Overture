@@ -52,6 +52,11 @@ namespace gl {
 
 	}
 
+	void draw(VertexArray& vertexArray, uint32_t vertexCount) {
+		vertexArray.bind();
+		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	}
+
 	void drawLines(VertexArray& vertexArray, uint32_t vertexCount) {
 		vertexArray.bind();
 		glDrawArrays(GL_LINES, 0, vertexCount);

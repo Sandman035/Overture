@@ -8,7 +8,7 @@
 
 namespace gl {
 	enum class ShaderDataType {
-		None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
+		None = 0, Float, Float2, Float3, Float4
 	};
 
 	uint32_t ShaderDataTypeSize(ShaderDataType type);
@@ -59,7 +59,6 @@ namespace gl {
 			void unbind();
 
 			void setData(const void* data, uint32_t size);
-			void setData();
 
 			BufferLayout& getLayout() { return m_layout; }
 			void setLayout(const BufferLayout& layout) { m_layout = layout; }
@@ -67,9 +66,6 @@ namespace gl {
 		private:
 			uint32_t m_rendererID;
 			BufferLayout m_layout;
-
-			f32* m_verticies;
-			uint32_t m_size;
 	};
 
 	class IndexBuffer {

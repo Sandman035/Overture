@@ -2,13 +2,24 @@
 
 #include <core/layer.h>
 
+#include <defines.h>
 #include <rendering/opengl/opengl_renderer.h>
+
+static f32 verticies[] = {
+	0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
+    -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // bottom left
+    0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top
+};
+
+static uint32_t indices[] {
+	0, 1, 2 
+};
 
 class TestLayer : public Layer {
     public:
 		f32 rotation = 0;
 
-        TestLayer(const std::string& name) :name(name), shader("../test/res/test.glsl") {};
+        TestLayer(const std::string& name) :name(name), shader("../test/res/test.glsl"), vertexBuffer(verticies, sizeof(verticies)), indexBuffer(indices, sizeof(indices) / sizeof(uint32_t)) {};
         virtual ~TestLayer() = default;
 
         void update(f32 deltaTime) override;
@@ -19,6 +30,7 @@ class TestLayer : public Layer {
 	private:
 		std::string name;
 		gl::Shader shader;
-		uint32_t VBO, VAO;
 		gl::VertexArray vertexArray;
+		gl::VertexBuffer vertexBuffer;
+		gl::IndexBuffer indexBuffer;
 };

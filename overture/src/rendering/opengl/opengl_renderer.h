@@ -16,6 +16,7 @@ namespace gl {
 	void clear();
 
 	void drawIndexed(VertexArray& vertexArray, uint32_t indexCount);
+	void draw(VertexArray& vertexArray, uint32_t vertexCount);
 	void drawLines(VertexArray& vertexArray, uint32_t vertexCount);
 	
 	void setLineWidth(f32 width);
