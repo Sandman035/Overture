@@ -26,6 +26,5 @@ namespace renderer {
 
 	void onResize(GLFWwindow* window, i32 width, i32 height) {
 		gl::setViewport(0, 0, width, height);
-		DEBUG("Window Resized %d, %d", width, height);
 	}
 }

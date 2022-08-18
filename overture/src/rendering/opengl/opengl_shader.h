@@ -7,8 +7,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include <glm/glm.hpp>
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 namespace gl {
 	class Shader {

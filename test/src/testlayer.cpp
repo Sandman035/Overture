@@ -20,13 +20,24 @@ void TestLayer::update(f32 deltaTime) {
 
 	shader.bind();
 
+	//gl::drawIndexed(vertexArray, 3);
+
 	glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void TestLayer::start() {
-    DEBUG("it works");
+	//gl::VertexBuffer vertexBuffer(verticies, sizeof(verticies));
+	//gl::BufferLayout layout = {
+	//	{gl::ShaderDataType::Float3, "aPos"},
+	//	{gl::ShaderDataType::Float3, "aColor"}
+	//};
+	//vertexBuffer.setLayout(layout);
+	//vertexArray.addVertexBuffer(vertexBuffer);
 
+	//gl::IndexBuffer indexBuffer(indices, sizeof(indices) / sizeof(uint32_t));
+	//vertexArray.setIndexBuffer(indexBuffer);
+	
 	glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -43,5 +54,4 @@ void TestLayer::start() {
 }
 
 void TestLayer::end() {
-	DEBUG("end");
 }

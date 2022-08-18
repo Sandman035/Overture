@@ -25,7 +25,7 @@
 
 #ifdef __gl_h_
 //TODO: fix this error somehow... or not
-//#error OpenGL header already included, remove this include, glad already provides it
+#error OpenGL header already included, remove this include, glad already provides it
 #endif
 #define __gl_h_
 

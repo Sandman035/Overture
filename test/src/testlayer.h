@@ -3,7 +3,6 @@
 #include <core/layer.h>
 
 #include <rendering/opengl/opengl_renderer.h>
-#include <rendering/opengl/opengl_shader.h>
 
 class TestLayer : public Layer {
     public:

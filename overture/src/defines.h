@@ -16,6 +16,8 @@ typedef double f64;
 typedef int b32;
 typedef bool b8;
 
+#define GLFW_INCLUDE_NONE
+
 // Platform detection
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
 #define PLATFORM_WINDOWS 1

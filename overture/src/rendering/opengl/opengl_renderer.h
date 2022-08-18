@@ -5,6 +5,7 @@
 #include <cstdint>
 
 #include <glm/glm.hpp>
+#include "opengl_shader.h"
 #include "opengl_vertex_array.h"
 
 namespace gl {
