@@ -34,8 +34,7 @@ namespace gl {
 		}
 	}
 
-	VertexBuffer::VertexBuffer(f32* verticies, uint32_t size) {
-		// This should be working
+	VertexBuffer::VertexBuffer(const void* verticies, uint32_t size) {
 		glGenBuffers(1, &m_rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, verticies, GL_STATIC_DRAW);

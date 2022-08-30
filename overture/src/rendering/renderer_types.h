@@ -2,13 +2,12 @@
 
 #include <defines.h>
 
-#include <cstdint>
+#include <glm/glm.hpp>
 
 namespace renderer {
-	struct PosColorVertex {
-		f32 x;
-		f32 y;
-		f32 z;
-		uint32_t abgr;
+	struct PosTexColor {
+		glm::vec3 pos;
+		glm::vec2 tex;
+		glm::vec3 color;
 	};
 }

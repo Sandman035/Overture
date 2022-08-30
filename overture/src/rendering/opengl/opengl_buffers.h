@@ -52,7 +52,7 @@ namespace gl {
 
 	class VertexBuffer {
 		public:
-			VertexBuffer(f32* verticies, uint32_t size);
+			VertexBuffer(const void* verticies, uint32_t size);
 			~VertexBuffer();
 
 			void bind();

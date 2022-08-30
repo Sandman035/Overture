@@ -3,6 +3,8 @@
 #include <core/input.h>
 #include <core/application.h>
 
+#include <rendering/components.h>
+
 struct TestComponent {
 	f32 thing;
 };
@@ -16,34 +18,24 @@ void TestLayer::update(f32 deltaTime) {
 
 	shader->bind();
 
-	gl::drawIndexed(vertexArray, 0);
+	gl::drawIndexed(*scene.getComponent<Mesh>(testEntity).vertexArray, 0);
 }
 
 void TestLayer::start() {
-	shader = new gl::Shader("../test/res/test.glsl");
-	vertexBuffer = new gl::VertexBuffer(verticies, sizeof(verticies));
-	indexBuffer = new gl::IndexBuffer(indices, sizeof(indices) / sizeof(uint32_t));
+	scene.init();
+	scene.registerComponent<TestComponent>();
+	scene.registerComponent<Mesh>();
+
+	testEntity = scene.createEntity();
+
+	scene.addComponent<TestComponent>(testEntity, { 0.1f });
+	scene.addComponent<Mesh>(testEntity, {verticies, indices});
+
 	texture = new gl::Texture2D("../test/res/wall.jpg");
-
-	gl::BufferLayout layout = {
-		{gl::ShaderDataType::Float3, "aPos"},
-		{gl::ShaderDataType::Float3, "aColor"},
-		{gl::ShaderDataType::Float2, "aTextCoord"}
-	};
-	vertexBuffer->setLayout(layout);
-	vertexArray.addVertexBuffer(*vertexBuffer);
-
-	vertexArray.setIndexBuffer(*indexBuffer);
+	shader = new gl::Shader("../test/res/test.glsl");
 
 	shader->bind();
 	shader->setInt("ourTexture", 0);
-
-	scene.init();
-	scene.registerComponent<TestComponent>();
-
-	ecs::Entity testEntity = scene.createEntity();
-
-	scene.addComponent<TestComponent>(testEntity, { 0.1f });
 
 	DEBUG("%f", scene.getComponent<TestComponent>(testEntity).thing);
 }
