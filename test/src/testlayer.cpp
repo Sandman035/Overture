@@ -18,7 +18,9 @@ void TestLayer::update(f32 deltaTime) {
 
 	shader->bind();
 
-	gl::drawIndexed(*scene.getComponent<Mesh>(testEntity).vertexArray, 0);
+	if (scene.hasComponent<Mesh>(testEntity)) {
+		gl::drawIndexed(*scene.getComponent<Mesh>(testEntity).vertexArray, 0);
+	}
 }
 
 void TestLayer::start() {
